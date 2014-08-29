@@ -137,6 +137,57 @@ HOST: http://app.api.gizwits.com
 
 ## Bindings [/bindings]
 
+### Bind Devices [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                },{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                }]
+            }
+    
++ Response 200 (application/json)
+
+### Unbind Devices [DELETE]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                },{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                }]
+            }
+    
++ Response 200 (application/json)
+
+
 ## M2M [/m2m{?product_key}{&did}]
 
 # Group API for devices
