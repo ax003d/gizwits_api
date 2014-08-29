@@ -135,6 +135,33 @@ HOST: http://app.api.gizwits.com
 
 ## Device history data [/devices/{did}]
 
++ Parameters
+    + did (required, string, `abcada`)
+
+### Retrieve device history data [GET]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "ts": 148293984328,
+                    "payload": "123456"
+                },{
+                    "ts": 148293984328,
+                    "payload": "123456"
+                }]
+            }
+
+
 ## Bindings [/bindings]
 
 ### Bind Devices [POST]
@@ -189,6 +216,29 @@ HOST: http://app.api.gizwits.com
 
 
 ## M2M [/m2m{?product_key}{&did}]
+
++ Parameters
+    + product_key (required, string, `adkfaldl`)
+    + did (optional, string, `abcada`)
+    
+### Get M2M Info [GET]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "host": "m2m.gizwits.com",
+                "port": "3128"
+            }
+
 
 # Group API for devices
 
