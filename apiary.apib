@@ -96,7 +96,7 @@ HOST: http://app.api.gizwits.com
                 "password": "123456"
             }
             
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
     
@@ -104,33 +104,6 @@ HOST: http://app.api.gizwits.com
                 "uid": "akkdlfeiow", 
                 "token": "akdlfkad",
                 "expire_at": 13894002020
-            }
-
-## Devices [/devices]
-
-### Get Binded Devices [GET]
-
-+ Request (application/json)
-
-    + Header
-    
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-    
-+ Response 201 (application/json)
-
-    + Body
-    
-            {
-                "devices": [{
-                    "did": "abcada",
-                    "mac": "1122334455667788",
-                    "passcode": "123456"
-                },{
-                    "did": "abcada",
-                    "mac": "1122334455667788",
-                    "passcode": "123456"
-                }]
             }
 
 ## Device history data [/devices/{did}]
@@ -163,6 +136,31 @@ HOST: http://app.api.gizwits.com
 
 
 ## Bindings [/bindings]
+
+### Get Binded Devices [GET]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+    
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                },{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                }]
+            }
 
 ### Bind Devices [POST]
 
@@ -241,6 +239,33 @@ HOST: http://app.api.gizwits.com
 
 
 # Group API for devices
+
+## Devices [/devices]
+
+### Device Provision [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+        
+            {
+                "product_key": "abcadfe",
+                "MAC": "112233445566"
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "did": "abaadd",
+                "host": "m2m.gizwits.com",
+                "port": "3128"
+            }
 
 # Group API for M2M
 
