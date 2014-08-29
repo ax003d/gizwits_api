@@ -26,6 +26,58 @@ HOST: http://app.api.gizwits.com
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
+            
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {
+                "username": "bob",
+                "password": "123456"
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+            
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+ 
+            {   
+                "authData": {
+                    "baidu": {
+                        "uid":2346677,
+                        "uname":"liupc24",
+                        "portrait":"e2c1776c31393837313031319605",
+                        "access_token":"pnktnjyb996sj4p156gjtp4im"
+                    }
+                }
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
 
 ## Login [/login]
 
