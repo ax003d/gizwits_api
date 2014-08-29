@@ -108,6 +108,31 @@ HOST: http://app.api.gizwits.com
 
 ## Devices [/devices]
 
+### Get Binded Devices [GET]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+    
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                },{
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "passcode": "123456"
+                }]
+            }
+
 ## Device history data [/devices/{did}]
 
 ## Bindings [/bindings]
