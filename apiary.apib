@@ -337,5 +337,38 @@ HOST: http://app.api.gizwits.com
             
 + Response 200 (application/json)
 
+## Verify Device [/verify/device]
+
+### Verify Device [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+    
+            {
+                "did": "akkdlfeiow", 
+                "passcode": "akdlfkad"
+            }
+            
++ Response 401 (application/json)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+    
+            {
+                "did": "akkdlfeiow", 
+                "passcode": "akdlfkad"
+            }
+            
++ Response 200 (application/json)
 
 # Group API for third-party clouds
