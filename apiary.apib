@@ -106,7 +106,7 @@ HOST: http://app.api.gizwits.com
                 "expire_at": 13894002020
             }
 
-## Device history data [/devices/{did}]
+## Device history data [/devdata/{did}]
 
 + Parameters
     + did (required, string, `abcada`)
@@ -154,11 +154,15 @@ HOST: http://app.api.gizwits.com
                 "devices": [{
                     "did": "abcada",
                     "mac": "1122334455667788",
-                    "passcode": "123456"
+                    "passcode": "123456",
+                    "host": "m2m.gizwits.com",
+                    "port": "3128"
                 },{
                     "did": "abcada",
                     "mac": "1122334455667788",
-                    "passcode": "123456"
+                    "passcode": "123456",
+                    "host": "m2m.gizwits.com",
+                    "port": "3128"
                 }]
             }
 
@@ -213,7 +217,7 @@ HOST: http://app.api.gizwits.com
 + Response 200 (application/json)
 
 
-## M2M [/m2m{?product_key}{&did}]
+## Device M2M [/devices/{&did}{?product_key}]
 
 + Parameters
     + product_key (required, string, `adkfaldl`)
@@ -233,6 +237,9 @@ HOST: http://app.api.gizwits.com
     + Body
     
             {
+                "did": "abcada",
+                "mac": "1122334455667788",
+                "passcode": "123456",
                 "host": "m2m.gizwits.com",
                 "port": "3128"
             }
