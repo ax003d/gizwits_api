@@ -303,4 +303,39 @@ HOST: http://app.api.gizwits.com
 
 # Group API for M2M
 
+## Verify User [/verify/user]
+
+### Verify User [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+    
+            {
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad"
+            }
+            
++ Response 401 (application/json)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+    
+            {
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad"
+            }
+            
++ Response 200 (application/json)
+
+
 # Group API for third-party clouds
