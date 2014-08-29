@@ -5,6 +5,38 @@ HOST: http://app.api.gizwits.com
 
 # Group API for apps
 
+## Users [/users]
+### Create User [POST]
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {}
+
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
+## Login [/login]
+
+## Devices [/devices]
+
+## Device history data [/devices/{did}]
+
+## Bindings [/bindings]
+
+## M2M [/m2m{?product_key}{&did}]
+
 # Group API for devices
 
 # Group API for M2M
