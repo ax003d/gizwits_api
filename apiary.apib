@@ -146,6 +146,25 @@ Both anonymous user register & login should call this API.
                 "expire_at": 13894002020
             }
 
+## Request Password Reset [/requestPasswordReset]
+
+### Request Password Reset
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "email": "bob@bob.com"
+            }
+
++ Response 200 (application/json)
+
+
 ## Device history data [/devdata/{did}{?start_ts}{&end_ts}{&limit}{&skip}]
 
 History data is ordered by ts descending.
