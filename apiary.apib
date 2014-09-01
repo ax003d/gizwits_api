@@ -295,9 +295,9 @@ History data is ordered by ts descending.
 
 ## Devices [/devices]
 
-### Device Provision [POST]
+### Create Device [POST]
 
-+ Request (application/json)
++ Request (application/x-www-form-urlencoded)
 
     + Header
     
@@ -305,21 +305,14 @@ History data is ordered by ts descending.
 
     + Body
         
-            {
-                "product_key": "abcadfe",
-                "passcode": "adjfakdk",
-                "mac": "112233445566"
-            }
+                product_key=abcadfe&passcode=adjfakdk&mac=112233445566
+
             
-+ Response 201 (application/json)
++ Response 201 (application/text)
 
     + Body
     
-            {
-                "did": "abaadd",
-                "host": "m2m.gizwits.com",
-                "port": "3128"
-            }
+                did=abaadd
             
 ## OTA [/ota/{did}]
 
@@ -328,32 +321,27 @@ History data is ordered by ts descending.
 
 ### Check OTA [GET]
 
-+ Request (application/json)
++ Request (application/text)
 
     + Header
     
             X-Gizwits-Application-Id: {appid}
             
-+ Response 200 (application/json)
++ Response 200 (application/text)
 
-    + Body
-    
-            {}
             
-+ Request (application/json)
++ Request (application/text)
 
     + Header
     
             X-Gizwits-Application-Id: {appid}
             
-+ Response 200 (application/json)
++ Response 200 (application/text)
 
     + Body
     
-            {
-                "version": 2,
-                "url": "http://xxx"
-            }
+                ver=2&url=http://xxx
+
 
 # Group API for M2M
 
