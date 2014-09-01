@@ -140,13 +140,14 @@ Both anonymous user register & login should call this API.
                 "expire_at": 13894002020
             }
 
-## Device history data [/devdata/{did}{?since}{&limit}{&skip}]
+## Device history data [/devdata/{did}{?start_ts}{&end_ts}{&limit}{&skip}]
 
 History data is ordered by ts descending.
 
 + Parameters
     + did (required, string, `abcada`)
-    + since (required, number, `1349032093`)
+    + start_ts (required, number, `1349032093`)
+    + end_ts (required, number, `1349032093`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
