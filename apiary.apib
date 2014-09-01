@@ -3,6 +3,12 @@ HOST: http://app.api.gizwits.com
 
 # Gizwits Open API
 
+## Error codes
+
+| status |     code     | message |
+|--------|:------------:|--------:|
+| 200    | 9000         | OK      |
+
 # Group API for apps
 
 ## Users [/users]
@@ -258,12 +264,12 @@ History data is ordered by ts descending.
 
 
 ## Device Detail [/devices/{did}{?product_key}]
+    
+### Get Device Info [GET]
 
 + Parameters
     + product_key (required, string, `adkfaldl`)
     + did (required, string, `abcada`)
-    
-### Get Device Info [GET]
 
 + Request (application/json)
 
@@ -302,7 +308,7 @@ History data is ordered by ts descending.
             {
                 "product_key": "abcadfe",
                 "passcode": "adjfakdk",
-                "MAC": "112233445566"
+                "mac": "112233445566"
             }
             
 + Response 201 (application/json)
