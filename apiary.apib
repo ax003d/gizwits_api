@@ -10,11 +10,19 @@ HOST: http://app.api.gizwits.com
 
 **Notice:** this API should go via https.
 
+Both anonymous user register & login should call this API.
+
 + Request (application/json)
 
     + Header
     
             X-Gizwits-Application-Id: {appid}
+            
+    + Body
+            
+            {
+                "phone_id": "adkaldk"
+            }
 
 + Response 201 (application/json)
 
@@ -76,6 +84,31 @@ HOST: http://app.api.gizwits.com
                 "uid": "akkdlfeiow", 
                 "token": "akdlfkad",
                 "expire_at": 13894002020
+            }
+
+## User Detail [/users/{uid}]
+
+### Update User Info [PUT]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {
+                "old_pwd": "123456",
+                "new_pwd": "123456"
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "updatedAt": "2011-11-07T21:25:10.623Z"
             }
 
 ## Login [/login]
@@ -143,7 +176,7 @@ History data is ordered by ts descending.
 
 ## Bindings [/bindings?{limit}&{skip}]
 
-### Get Binded Devices [GET]
+### Get Bound Devices [GET]
 
 * Parameters
     + limit (optional, number, `20`)
@@ -223,13 +256,13 @@ History data is ordered by ts descending.
 + Response 200 (application/json)
 
 
-## Device M2M [/devices/{did}{?product_key}]
+## Device Detail [/devices/{did}{?product_key}]
 
 + Parameters
     + product_key (required, string, `adkfaldl`)
     + did (required, string, `abcada`)
     
-### Get M2M Info [GET]
+### Get Device Info [GET]
 
 + Request (application/json)
 
