@@ -109,13 +109,34 @@ Both anonymous user register & login should call this API.
                 "new_pwd": "123456"
             }
             
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
     
             { 
                 "updatedAt": "2011-11-07T21:25:10.623Z"
             }
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "email": "bob@bob.com",
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
 
 ## Login [/login]
 
@@ -149,6 +170,8 @@ Both anonymous user register & login should call this API.
 ## Request Password Reset [/requestPasswordReset]
 
 ### Request Password Reset [POST]
+
+Can reset password for user who has email set.
 
 + Request (application/json)
 
