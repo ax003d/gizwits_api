@@ -216,6 +216,25 @@ username can be username or email or phone.
                 "expire_at": 13894002020
             }
 
+## Get Codes [/codes]
+
+### Get Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13223233"
+            }
+
++ Response 200 (application/json)
+
+
 ## Request Password Reset [/requestPasswordReset]
 
 Can reset password for user who has email set.
@@ -232,6 +251,22 @@ Can reset password for user who has email set.
 
             {
                 "email": "bob@bob.com"
+            }
+
++ Response 200 (application/json)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13232433",
+                "code": "13232',
+                "new_pwd": "1323200"
             }
 
 + Response 200 (application/json)
