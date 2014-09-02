@@ -95,6 +95,7 @@ Both anonymous user register & login should call this API.
 
 Anonymous user PUT username & password to become a normal user.
 
+
 + Request (application/json)
 
     + Header
@@ -188,6 +189,9 @@ Anonymous user PUT username & password to become a normal user.
 ### Login [POST]
 
 **Notice:** this API should go via https.
+
+username can be username or email or phone.
+
 
 + Request (application/json)
 
@@ -352,12 +356,11 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/json)
 
 
-## Device Detail [/devices/{did}{?product_key}]
+## Device Detail [/devices/{did}]
     
 ### Get Device Info [GET]
 
 + Parameters
-    + product_key (required, string, `adkfaldl`)
     + did (required, string, `abcada`)
 
 + Request (application/json)
