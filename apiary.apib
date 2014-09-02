@@ -204,6 +204,8 @@ History data is ordered by ts descending.
 
 ### Get Bound Devices [GET]
 
+M2M will also call this API to get user bindings.
+
 * Parameters
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
@@ -324,14 +326,14 @@ History data is ordered by ts descending.
 
     + Body
         
-                product_key=abcadfe&passcode=adjfakdk&mac=112233445566
+            product_key=abcadfe&passcode=adjfakdk&mac=112233445566
 
             
 + Response 201 (application/text)
 
     + Body
     
-                did=abaadd
+            did=abaadd
 
 
 ## Device Detail [/devices/{did}]
