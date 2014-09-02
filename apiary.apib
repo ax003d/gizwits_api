@@ -237,9 +237,12 @@ username can be username or email or phone.
 
 ## Request Password Reset [/requestPasswordReset]
 
-Can reset password for user who has email set.
-
 ### Request Password Reset [POST]
+
+Can reset password for user who has email or phone.
+
+If reset password by phone, should call get codes API first.
+
 
 + Request (application/json)
 
