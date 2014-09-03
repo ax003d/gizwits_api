@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://app.api.gizwits.com
+HOST: http://api.gizwits.com
 
 # Gizwits Open API
 
@@ -13,7 +13,7 @@ HOST: http://app.api.gizwits.com
 
 # Group API for apps
 
-## Users [/users]
+## Users [/app/users]
 ### Create User [POST]
 
 **Notice:** this API should go via https.
@@ -427,7 +427,7 @@ M2M will also call this API to get user bindings.
 
 # Group API for devices
 
-## Devices [/devices]
+## Devices [/dev/devices]
 
 ### Create Device [POST]
 
@@ -445,7 +445,10 @@ M2M will also call this API to get user bindings.
             did=abaadd
 
 
-## Device Detail [/devices/{did}]
+## Device Provision [/dev/devices/{did}]
+
++ Parameters
+    + did (required, string, `adaad`)
 
 ### Device Provision [GET]
 
