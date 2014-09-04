@@ -10,6 +10,15 @@ HOST: http://api.gizwits.com
 | 200    | 9000         | OK      |
 | 400    | 9001         | mac already registered!      |
 | 400    | 9002         | product_key invalid      |
+| 400    | 9003         | appid invalid      |
+| 400    | 9004         | token invalid      |
+
+## Error Message
+
+    {
+      "error_code": "9002",
+      "error_message": "xxx"
+    }
 
 # Group API for apps
 
@@ -312,7 +321,7 @@ History data is ordered by ts descending.
             }
 
 
-## Bindings [/bindings?{limit}&{skip}]
+## Bindings [/app/bindings?{limit}&{skip}]
 
 ### Get Bound Devices [GET]
 
