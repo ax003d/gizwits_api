@@ -87,7 +87,7 @@ Both anonymous user register & login should call this API.
             {   
                 "authData": {
                     "src": "baidu|sina|qq",
-                    "uid":2346677,
+                    "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
                 }
             }
@@ -384,6 +384,11 @@ M2M will also call this API to get user bindings.
             }
     
 + Response 200 (application/json)
+
+           {
+                "success": ['abc', 'add'],
+                "failed": ['adad', 'ee']
+           }
 
 ### Unbind Devices [DELETE]
 
