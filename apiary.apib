@@ -15,6 +15,7 @@ HOST: http://api.gizwits.com
 | 400    | 9005         | user not exist      |
 | 400    | 9006         | token expired      |
 | 400    | 9007         | m2m_id invalid      |
+| 500    | 9008         | server error      |
 
 ## Error Message
 
@@ -103,7 +104,7 @@ Both anonymous user register & login should call this API.
                 "expire_at": 13894002020
             }
 
-## User Detail [/users/{uid}]
+## User Detail [/app/users/{uid}]
 
 ### Update User Info [PUT]
 
@@ -230,9 +231,9 @@ username can be username or email or phone.
                 "expire_at": 13894002020
             }
 
-## Get Codes [/codes]
+## Get & Verify Codes [/app/codes]
 
-### Get Codes [POST]
+### Get & Verify Codes [POST]
 
 + Request (application/json)
 
@@ -244,6 +245,21 @@ username can be username or email or phone.
 
             {
                 "phone": "13223233"
+            }
+
++ Response 200 (application/json)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13223233",
+                "code": "123456"
             }
 
 + Response 200 (application/json)
