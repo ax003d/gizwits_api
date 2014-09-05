@@ -199,7 +199,7 @@ Anonymous user PUT username & password to become a normal user.
             }
 
 
-## Login [/login]
+## Login [/app/login]
 
 ### Login [POST]
 
@@ -265,7 +265,7 @@ username can be username or email or phone.
 + Response 200 (application/json)
 
 
-## Request Password Reset [/requestPasswordReset]
+## Request Password Reset [/app/rest_password]
 
 ### Request Password Reset [POST]
 
@@ -305,7 +305,7 @@ If reset password by phone, should call get codes API first.
 + Response 200 (application/json)
 
 
-## Device history data [/devdata/{did}{?start_ts}{&end_ts}{&limit}{&skip}]
+## Device history data [/app/devdata/{did}{?start_ts}{&end_ts}{&limit}{&skip}]
 
 History data is ordered by ts descending.
 
@@ -431,7 +431,7 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/json)
 
 
-## Device Detail [/devices/{did}]
+## Device Detail [/app/devices/{did}]
     
 ### Get Device Info [GET]
 
@@ -494,7 +494,7 @@ M2M will also call this API to get user bindings.
             host=m2m.gizwits.com&port=3128&server_ts=1283200300
 
             
-## OTA [/ota/{did}]
+## OTA [/dev/ota/{did}]
 
 + Parameters
     + did (required, string, `abcada`)
@@ -517,7 +517,7 @@ M2M will also call this API to get user bindings.
 
 # Group API for M2M
 
-## Verify User [/verify/user]
+## Verify User [/m2m/verify/user]
 
 ### Verify User [POST]
 
@@ -552,7 +552,7 @@ M2M will also call this API to get user bindings.
             
 + Response 200 (application/json)
 
-## Verify Device [/verify/device]
+## Verify Device [/m2m/verify/device]
 
 ### Verify Device [POST]
 
