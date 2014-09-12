@@ -223,6 +223,29 @@ Anonymous user PUT username & password to become a normal user.
                 "updatedAt": "2011-11-07T21:25:10.623Z"
             }
 
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "phone": "1328830223",
+                "password": "123456",
+                "code": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
 
 ## Login [/app/login]
 
