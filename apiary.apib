@@ -357,7 +357,7 @@ M2M will also call this API to get user bindings.
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
             
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
     
@@ -566,7 +566,8 @@ M2M will also call this API to get user bindings.
     
             {
                 "did": "akkdlfeiow", 
-                "passcode": "akdlfkad"
+                "passcode": "akdlfkad",
+                "xpasscode": "akdlfkad"
             }
             
 + Response 401 (application/json)
