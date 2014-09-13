@@ -354,7 +354,7 @@ If reset password by phone, should call get codes API first.
 + Response 200 (application/json)
 
 
-## Device history data [/app/devdata/{did}{?start_ts}{&end_ts}{&limit}{&skip}]
+## Device history data [/app/devdata/{did}{?start_ts}{&end_ts}{&entity}{&attr}{&limit}{&skip}]
 
 History data is ordered by ts descending.
 
@@ -362,6 +362,8 @@ History data is ordered by ts descending.
     + did (required, string, `abcada`)
     + start_ts (required, number, `1349032093`)
     + end_ts (required, number, `1349032093`)
+    + entity (optional, number, `1`)
+    + attr (optional, number, `1`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
@@ -381,10 +383,14 @@ History data is ordered by ts descending.
             {
                 "data": [{
                     "ts": 148293984328,
-                    "payload": "123456"
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
                 },{
                     "ts": 148293984328,
-                    "payload": "123456"
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
                 }]
             }
 
