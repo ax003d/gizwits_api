@@ -16,6 +16,8 @@ HOST: http://apiv4.iotsdk.com
 | 400    | 9006         | token expired      |
 | 400    | 9007         | m2m_id invalid      |
 | 500    | 9008         | server error      |
+| 400    | 9009         | code expired      |
+| 400    | 9010         | code invalid      |
 
 ## Error Message
 
@@ -624,8 +626,8 @@ M2M will also call this API to get user bindings.
     + Body
     
             {
-                "did": "akkdlfeiow", 
-                "passcode": "akdlfkad",
+                "did": "gdGn7PzAYf4VrhnVag5x8D", 
+                "passcode": "gokit",
                 "xpasscode": "akdlfkad"
             }
             
@@ -640,8 +642,9 @@ M2M will also call this API to get user bindings.
     + Body
     
             {
-                "did": "akkdlfeiow", 
-                "passcode": "akdlfkad"
+                "did": "gdGn7PzAYf4VrhnVag5x8D", 
+                "passcode": "gokit",
+                "xpasscode": "akdlfkad"
             }
             
 + Response 200 (application/json)
