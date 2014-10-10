@@ -17,6 +17,9 @@ HOST: http://api.gizwits.com
 | 500    | 9008         | server error      |
 | 400    | 9009         | code expired      |
 | 400    | 9010         | code invalid      |
+| 400    | 9011         | sandbox scale quota exhausted!      |
+| 400    | 9012         | production scale quota exhausted!      |
+| 400    | 9013         | product has no request scale!      |
 | xxx    | 9999         | reserved      |
 
 ## Error Message
@@ -521,6 +524,9 @@ M2M will also call this API to get user bindings.
 ## Devices [/dev/devices]
 
 ### Create Device [POST]
+
+| status |     code     | message |
+| 400    | 9002         | product_key invalid      |
 
 + Request (application/x-www-form-urlencoded)
 
