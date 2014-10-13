@@ -548,6 +548,33 @@ M2M will also call this API to get user bindings.
             }
 
 
+## Control Device [/app/control/{?did}]
+
+### Remote Control Device [POST]
+
++ Parameters
+    + did (required, string, `did`)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+    
+            {
+                "raw": [<byte>, <byte>, ...]
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {}
+
+
 # Group API for devices
 
 ## Devices [/dev/devices]
