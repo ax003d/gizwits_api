@@ -617,25 +617,24 @@ M2M will also call this API to get user bindings.
             host=m2m.gizwits.com&port=3128&server_ts=1283200300
 
             
-## OTA [/dev/ota/{did}]
+## OTA [/dev/ota/target_fid{?did,product_key,hard_version,soft_version,current_fid}]
 
 + Parameters
     + did (required, string, `abcada`)
+    + product_key (required, string, `pk`)
+    + hard_version (required, string, `hv`)
+    + soft_version (required, string, `sv`)
+    + current_fid (required, int, `fid`)
 
-### Check OTA [GET]
+### Get target fid [GET]
 
-+ Request (application/text)
-
-+ Response 200 (application/text)
-
-            
 + Request (application/text)
 
 + Response 200 (application/text)
 
     + Body
     
-            ver=2&url=http://xxx
+            target_fid=2&download_url=http://xxx
 
 
 # Group API for M2M
