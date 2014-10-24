@@ -617,7 +617,7 @@ M2M will also call this API to get user bindings.
             host=m2m.gizwits.com&port=3128&server_ts=1283200300
 
             
-## OTA [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
+## OTA - Get Target fid [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
 
 + Parameters
     + did (required, string, `abcada`)
@@ -636,6 +636,31 @@ M2M will also call this API to get user bindings.
     + Body
     
             target_fid=2&download_url=http://xxx
+
+
+## OTA - Download Firmware [/dev/ota/download{?product_key,type,hard_version,soft_version,fid}]
+
++ Parameters
+    + product_key (required, string, `pk`)
+    + type (required, int, `1`) ... wifi is 1, and mcu is 2
+    + hard_version (required, string, `hv`)
+    + soft_version (required, string, `sv`)
+    + fid (required, int, `fid`)
+
+### Download Firmware [GET]
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+
+    + Body
+
+            file
 
 
 # Group API for M2M
