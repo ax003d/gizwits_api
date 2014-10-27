@@ -664,6 +664,23 @@ M2M will also call this API to get user bindings.
             file
 
 
+## Connect JD+ [/dev/jd/{did}]
+
+### Update JD+ Info [POST]
+
++ Parameters
+    + did (required, string, `did`)
+
++ Request (application/text)
+
+    + Body
+
+            feed_id=xxx&access_key=xxx
+
+
++ Response 200 (application/text)
+
+
 # Group API for M2M
 
 ## Verify User [/m2m/verify/user]
@@ -742,4 +759,8 @@ M2M will also call this API to get user bindings.
             {
                 "mac": "adkflald",
                 "product_key": "akdlfkad"
+                "jd": {
+                    "feed_id": "xxx",
+                    "access_key": "xxx"
+                }
             }
