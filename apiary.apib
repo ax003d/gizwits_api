@@ -639,14 +639,11 @@ M2M will also call this API to get user bindings.
             target_fid=2&download_url=http://xxx
 
 
-## OTA - Download Firmware [/dev/ota/download{?product_key,type,hard_version,soft_version,fid}]
+## OTA - Download Firmware [/dev/ota/download/{id}/{file}
 
 + Parameters
-    + product_key (required, string, `pk`)
-    + type (required, int, `1`) ... wifi is 1, and mcu is 2
-    + hard_version (required, string, `hv`)
-    + soft_version (required, string, `sv`)
-    + fid (required, int, `fid`)
+    + id (required, int, `1`)
+    + file (required, string, `firm.bin`)
 
 ### Download Firmware [GET]
 
@@ -658,6 +655,7 @@ M2M will also call this API to get user bindings.
 
             Content-Type: application/octet-stream
             Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
 
     + Body
 
