@@ -405,6 +405,48 @@ History data is ordered by ts descending.
             }
 
 
+## Device history data batch [/app/devdata{?did,start_ts,end_ts,entity,attr,limit,skip}]
+
+History data is ordered by ts descending.
+
++ Parameters
+    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
+    + start_ts (optional, number, `1349032093`)
+    + end_ts (optional, number, `1349032093`)
+    + entity (optional, number, `1`)
+    + attr (optional, number, `6`)
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
+### Retrieve device history data batch [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
+                },{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
+                }]
+            }
+
+
 ## Bindings [/app/bindings{?limit,skip}]
 
 ### Get Bound Devices [GET]
