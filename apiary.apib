@@ -405,11 +405,12 @@ History data is ordered by ts descending.
             }
 
 
-## Device history data batch [/app/devdata{?did,start_ts,end_ts,entity,attr,limit,skip}]
+## Device history data batch [/app/devdata{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
 
 History data is ordered by ts descending.
 
 + Parameters
+    + product_key (required, string, `pk`)
     + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
     + start_ts (optional, number, `1349032093`)
     + end_ts (optional, number, `1349032093`)
