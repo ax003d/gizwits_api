@@ -472,7 +472,7 @@ History data is ordered by ts descending.
             }
 
 
-## Bindings [/app/bindings{?limit,skip}]
+## Bindings [/app/bindings{?hide_disabled,limit,skip}]
 
 ### Get Bound Devices [GET]
 
@@ -481,6 +481,7 @@ M2M will also call this API to get user bindings.
 * Parameters
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
+    + hide_disabled (optional, string, `1`)
 
 + Request (application/json)
 
@@ -502,7 +503,8 @@ M2M will also call this API to get user bindings.
                     "passcode": "123456",
                     "host": "m2m.gizwits.com",
                     "port": 3128,
-                    "remark": ""
+                    "remark": "",
+                    "is_disabled": false
                 },{
                     "product_key": "akdlfkad",
                     "did": "abcada",
@@ -511,7 +513,8 @@ M2M will also call this API to get user bindings.
                     "passcode": "123456",
                     "host": "m2m.gizwits.com",
                     "port": 3128,
-                    "remark": ""
+                    "remark": "",
+                    "is_disabled": false
                 }]
             }
 
@@ -591,7 +594,8 @@ M2M will also call this API to get user bindings.
                 "is_online": false,
                 "passcode": "123456",
                 "host": "m2m.gizwits.com",
-                "port": "3128"
+                "port": "3128",
+                "is_disabled": false
             }
 
 ## Query Device [/app/devices{?product_key,mac}]
