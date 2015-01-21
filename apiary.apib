@@ -472,7 +472,7 @@ History data is ordered by ts descending.
             }
 
 
-## Product history data batch by attr name [/app/devdata2{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
+## Product history data batch by attr name [/app/devdata2{?product_key,did,start_ts,end_ts,name,limit,skip}]
 
 History data is ordered by ts descending.
 
@@ -481,8 +481,7 @@ History data is ordered by ts descending.
     + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
     + start_ts (optional, number, `1349032093`)
     + end_ts (optional, number, `1349032093`)
-    + entity (optional, number, `1`)
-    + attr (optional, string, `temp`)
+    + name (optional, string, `temp`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
@@ -502,14 +501,12 @@ History data is ordered by ts descending.
                 "data": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
+                    "name": "temp",
                     "val": 10
                 },{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
+                    "name": "temp",
                     "val": 10
                 }]
             }
