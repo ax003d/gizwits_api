@@ -429,7 +429,50 @@ History data is ordered by ts descending.
             }
 
 
-## Product history data batch [/app/devdata{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
+## Product history data batch by attr id [/app/devdata{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
+
+History data is ordered by ts descending.
+
++ Parameters
+    + product_key (required, string, `pk`)
+    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
+    + start_ts (optional, number, `1349032093`)
+    + end_ts (optional, number, `1349032093`)
+    + entity (optional, number, `1`)
+    + attr (optional, string, `1`)
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
+### Retrieve product history data batch [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
+                },{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "entity": 1,
+                    "attr": 1,
+                    "val": 10
+                }]
+            }
+
+
+## Product history data batch by attr name [/app/devdata2{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
 
 History data is ordered by ts descending.
 
@@ -721,6 +764,14 @@ M2M will also call this API to get user bindings.
     + Body
     
             host=m2m.gizwits.com&port=3128&server_ts=1283200300
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Body
+    
+            host=m2m.gizwits.com&port=3128&server_ts=1283200300&3rd_cloud=jd&product_uuid=xxx
 
             
 ## OTA - Get Target fid [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
