@@ -936,3 +936,78 @@ M2M will also call this API to get user bindings.
                     "access_key": "xxx"
                 }
             }
+
+# Group API for BT/BLE Data
+
+## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,limit,skip}]
+
+### Save Data [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "attrs": {
+                    "weight": 50,
+                    "fat": 0.2,
+                    "remark": "too thin"
+                }
+                "ts": xxxxx,
+                "phone_id": "xxxx"
+            }
+
++ Response 201 (application/json)
+
+### Retrieve Data [GET]
+
++ Parameters
+    + product_key (optional, string, ``)
+    + device_sn (optional, string, ``)
+    + start_ts (optional, number, ``)
+    + end_ts (optional, number, ``)
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2,
+                        "remark": "too thin"
+                    }
+                    "ts": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2,
+                        "remark": "too thin"
+                    }
+                    "ts": xxx
+                }]
+            }
