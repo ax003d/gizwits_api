@@ -511,6 +511,34 @@ History data is ordered by ts descending.
                 }]
             }
 
+## Device latest data [/app/devdata/{did}/latest]
+
+*Not published yet!*
+
++ Parameters
+    + did (required, string, `gdGn7PzAYf4VrhnVag5x8D`)
+
+### Get Device latest data [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
+                "updated_at": 148293984328,
+                "attr": {
+                  "temp": 10,
+                  "humi": 20
+                }
+            }
+
 
 ## Bindings [/app/bindings{?show_disabled,limit,skip}]
 
