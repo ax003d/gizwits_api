@@ -738,6 +738,55 @@ M2M will also call this API to get user bindings.
 
             {}
 
+## Scheduler [/app/scheduler]
+
+### Create Scheduler [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+              "date": "2015-01-01",
+              "time": "12:00",
+              "repeat": "none",
+              "task": [
+                {
+                  "did": "did1",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                },
+                {
+                  "did": "did2",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                }
+              ],
+              "retry_count": 3,
+              "retry_task": "all"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+              "id": "adkle"
+            }
+
+
+
 # Group API for devices
 
 ## Devices [/dev/devices]
