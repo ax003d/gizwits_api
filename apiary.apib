@@ -785,7 +785,118 @@ M2M will also call this API to get user bindings.
               "id": "adkle"
             }
 
+### Get Schedulers [GET]
 
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 1
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 2
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              },
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              }
+            ]
+
+## Remove Scheduler [/app/scheduler/{id}]
+
++ Parameters
+  + id (required, string, `sid1`)
+
+### Remove Scheduler [DELETE]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+## Get scheduler log [/app/scheduler/{id}/logs]
+
++ Parameters
+  + id (required, string, `sid1`)
+
+### Get latest scheduler log [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "datetime": "2015-01-02T12:00:00",
+              "status": "succeed|failed",
+              "detail": {
+                "did1": true,
+                "did2": false
+              }
+            }
 
 # Group API for devices
 
