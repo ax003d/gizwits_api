@@ -738,7 +738,7 @@ M2M will also call this API to get user bindings.
 
             {}
 
-## Scheduler [/app/scheduler]
+## Scheduler [/app/scheduler{?limit,skip}]
 
 ### Create Scheduler [POST]
 
@@ -786,6 +786,10 @@ M2M will also call this API to get user bindings.
             }
 
 ### Get Schedulers [GET]
+
++ Parameters
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
 
 + Request (application/text)
 
