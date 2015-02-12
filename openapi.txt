@@ -1,0 +1,833 @@
+[TOC]
+
+# Gizwits Open API
+
+## 简介
+
+机智云 Open API 主要帮助开发者通过 HTTP 的方式维护用户、用户与设备之间的绑定关系，以及获取设备数据、发送控制指令给设备。
+
+调用 API 需要获取 appid，product_key 和 token。appid 和 product_key 可以在产品信息页面获取到，token 通过用户注册和登录获取到。
+
+下文中的参数统一用 {appid} 来表示，请将你自己的 appid 整个替换掉 {appid} （包括大括号）。
+
+## 访问地址
+
+http://api.gizwits.com
+
+## SDK
+
+* python sdk: https://github.com/gizwits/gservice_sdk_py
+
+## 用户信息 [/app/users]
+
+### 创建匿名用户 [POST]
+
+如果您想让您的用户不需要显示注册和登录就能使用机智云的功能，就可以通过匿名注册的方式来为该用户创建一个匿名用户。phone_id 可以是手机的唯一识别码。
+
+或者您已经有了自己的用户系统，不希望用户再次注册一次机智云帐号，您也可以使用该接口，为您的每一个用户创建一个对应的机智云匿名帐号。这时，phone_id 可以是用户在您的系统中的唯一识别码。如在与微信应用做对接时，phone_id 可以设置成微信用户的 openid。
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            
+    + Body
+            
+            {
+                "phone_id": "apiary"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
+
++ 请求示例
+
+        curl --include \
+             --request POST \
+             --header "Content-Type: application/json" \
+             --header "X-Gizwits-Application-Id: {appid}" \
+             --data-binary "{
+            \"phone_id\": \"apiary\"
+        }" \
+        'http://api.gizwits.com/app/users'
+
+### 使用用户名和密码创建用户 [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {
+                "username": "bob",
+                "password": "123456"
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
++ 请求示例
+
+        curl --include \
+             --request POST \
+             --header "Content-Type: application/json" \
+             --header "X-Gizwits-Application-Id: {appid}" \
+             --data-binary "{
+            \"username\": \"bob\",
+            \"password\": \"123456\"
+        }" \
+        'http://api.gizwits.com/app/users'
+
+### 使用手机号创建用户 [POST]
+
+*需要先调用获取验证码接口获取验证码*
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {
+                "phone": "123456",
+                "password": "123456",
+                "code": "abc"
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
+### 使用第三方账号（百度/新浪）创建用户 [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+ 
+            {   
+                "authData": {
+                    "src": "baidu|sina",
+                    "uid": "2346677",
+                    "token":"pnktnjyb996sj4p156gjtp4im"
+                }
+            }
+            
++ Response 201 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
+### 匿名用户设置用户名和密码 [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "username": "bob",
+                "password": "abda2"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+### 匿名用户设置手机号和密码 [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "phone": "1328830223",
+                "password": "123456",
+                "code": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+### 修改密码 [PUT]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+    
+    + Body
+    
+            {
+                "old_pwd": "123456",
+                "new_pwd": "123456"
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            { 
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+
+### 修改 email [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "email": "bob@bob.com",
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+### 修改手机号 [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "phone": "1328830223",
+                "code": "abc"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+## 用户登录 [/app/login]
+
+*可以使用用户名/邮箱/手机号登录*
+
+### 用户登录 [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+    
+    + Body
+    
+            {
+                "username": "bob",
+                "password": "123456"
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            { 
+                "uid": "akkdlfeiow", 
+                "token": "akdlfkad",
+                "expire_at": 13894002020
+            }
+
+## 验证码 [/app/codes]
+
+### 获取验证码 [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13223233"
+            }
+
++ Response 200 (application/json)
+
+### 校验验证码 [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13223233",
+                "code": "123456"
+            }
+
++ Response 200 (application/json)
+
+## 重置密码 [/app/reset_password]
+
+### 使用邮箱重置密码 [POST]
+
+*请求成功后用户会收到一封重置密码的邮件, 用户根据邮件的链接进行密码重置*
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "email": "bob@bob.com"
+            }
+
++ Response 200 (application/json)
+
+### 使用手机号重置密码 [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
+    + Body
+
+            {
+                "phone": "13232433",
+                "code": "13232',
+                "new_pwd": "1323200"
+            }
+
++ Response 200 (application/json)
+
+## 获取设备最近上传数据 [/app/devdata/{did}/latest]
+
+### 获取设备最近上传数据点 [GET]
+
++ 参数列表
+    + did (required, string, `gdGn7PzAYf4VrhnVag5x8D`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
+                "updated_at": 148293984328,
+                "attr": {
+                  "temp": 10,
+                  "humi": 20
+                }
+            }
+
+
+## 获取设备历史数据 [/app/devdata2]
+
+### 获取设备历史数据 [GET]
+
++ 参数列表
+    + product_key (required, string, `pk`)
+    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
+    + start_ts (optional, number, `1349032093`)
+    + end_ts (optional, number, `1349032093`)
+    + name (optional, string, `temp`)
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "name": "temp",
+                    "val": 10
+                },{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "name": "temp",
+                    "val": 10
+                }]
+            }
+
+
+## 绑定关系 [/app/bindings]
+
+### 获取绑定列表 [GET]
+
++ 参数列表
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "devices": [{
+                    "product_key": "akdlfkad",
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "is_online": false,
+                    "passcode": "123456",
+                    "host": "m2m.gizwits.com",
+                    "port": 3128,
+                    "remark": "",
+                    "is_disabled": false
+                },{
+                    "product_key": "akdlfkad",
+                    "did": "abcada",
+                    "mac": "1122334455667788",
+                    "is_online": false,
+                    "passcode": "123456",
+                    "host": "m2m.gizwits.com",
+                    "port": 3128,
+                    "remark": "",
+                    "is_disabled": false
+                }]
+            }
+
+### 绑定设备 [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "passcode": "gokit",
+                    "remark": ""
+                }]
+            }
+    
++ Response 200 (application/json)
+
+           {
+                "success": ['abc', 'add'],
+                "failed": ['adad', 'ee']
+           }
+
+### 解除绑定 [DELETE]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
+    + Body
+    
+            {
+                "devices": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D"
+                }]
+            }
+    
++ Response 200 (application/json)
+
+           {
+                "success": ['abc', 'add'],
+                "failed": ['adad', 'ee']
+           }
+
+## 设备信息 [/app/devices/{did}]
+
+### 获取设备详细信息 [GET]
+
++ 参数列表
+    + did (required, string, `abcada`)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "product_key": "akdlfkad",
+                "did": "abcada",
+                "mac": "1122334455667788",
+                "is_online": false,
+                "passcode": "123456",
+                "host": "m2m.gizwits.com",
+                "port": "3128"
+            }
+
+## 查询设备 [/app/devices]
+
+### 根据 product_key 和 mac 查询设备 [GET]
+
++ 参数列表
+    + product_key (required, string, `product_key`)
+    + mac (required, string, `112233445566`)
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "did": "abcada",
+                "passcode": "123456",
+            }
+
+## 远程控制设备 [/app/control/{did}]
+
+远程控制设备可以通过两种方式，一种是设置数据点，一种是发送原始控制指令。
+推荐使用设置数据点的方式，通过这种方式控制设备，系统内部自动会生成原始控制指令发送给设备，使用起来更简单。
+
++ 参数列表
+    + did (required, string, `did`)
+
+### 设置数据点 [POST]
+
+* 只能设置可写类型的数据点
+* bool 类型的数据点设置为 true/false
+* enum 类型的数据点设置为枚举的字符串
+* uint8/uint16/uint32 类型的数据点设置为数字
+* binary 类型的数据设置为 hex 类型字符串，如发送一串二进制数据 0x01, 0x02, 0x03, 就写成 "010203"
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "attr": "temp",
+                "val": 10
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {}
+
+
+### 发送原始控制指令 [POST]
+
++ Request (application/json)
+
+    + Header
+    
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+    
+            {
+                "raw": [<byte>, <byte>, ...]
+            }
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {}
+
+## 定时任务 [/app/scheduler{?limit,skip}]
+
+定时任务分为一次性定时任务和可重复执行定时任务。一次性定时任务在设定好的日期和时间执行；可重复执行定时任务可以设置按星期重复，如每周一执行，工作日执行等，在重复的星期的设定时间执行。
+
+执行日期通过 date 参数进行设置，格式为："2015-01-01"。
+
+执行时间通过 time 参数进行设置，格式为："10:10"。
+
+重复类型通过 repeat 参数进行设置，不重复设置为 "none"；重复设置为 "mon", "tue", "wed", "thu", "fri", "sat", "sun" 的组合，组合之间用逗号分隔，如每周一和周二重复为 "mon,tue"。
+
+一次定时任务可以给多个已绑定的设备发送控制指令，只有设定的所有控制指令都发送成功，本次定时任务才算执行成功。任务内容通过 task 设定，为一个列表，列表内的内容为每个具体的任务。具体的任务需要提供设备 did, product_key 和要设置的数据点键值对 attrs。如：
+
+    {
+      "did": "did1",
+      "product_key": "xxx",
+      "attrs": {
+        "attr1": val,
+        "attr2": val
+      }
+    }
+
+对于执行失败的定时任务，可以设置重复次数和重复策略。重复次数的范围为 0 ～ 60 次。置重复策略分为全部重试和部分重试。全部重试，将在重试的时候发送所有设定的控制指令；部分重试，只对还未发送成功指令进行发送。
+
+重复次数通过 retry_count 来设置。
+
+重复策略通过 retry_task 来设置，全部重试为 "all"，部分重试为 "failed"。
+
+### 创建定时任务 [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+              "date": "2015-01-01",
+              "time": "12:00",
+              "repeat": "none",
+              "task": [
+                {
+                  "did": "did1",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                },
+                {
+                  "did": "did2",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                }
+              ],
+              "retry_count": 3,
+              "retry_task": "all"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+              "id": "adkle"
+            }
+
+### 获取定时任务 [GET]
+
++ 参数列表
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 1
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 2
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              },
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              }
+            ]
+
+## 删除定时任务 [/app/scheduler/{id}]
+
++ 参数列表
+  + id (required, string, `sid1`)
+
+### 删除定时任务 [DELETE]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+## 定时任务执行日志 [/app/scheduler/{id}/logs]
+
++ 参数列表
+  + id (required, string, `sid1`)
+
+### 获取最近一次定时任务执行日志 [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "datetime": "2015-01-02T12:00:00",
+              "status": "succeed|failed",
+              "detail": {
+                "did1": true,
+                "did2": false
+              }
+            }
