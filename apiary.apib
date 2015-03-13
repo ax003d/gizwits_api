@@ -1133,7 +1133,7 @@ type 可以为 normal 或者 center_control
 
 # Group API for BT/BLE Data
 
-## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,limit,skip}]
+## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,attrs,limit,skip}]
 
 ### Save Data [POST]
 
@@ -1167,6 +1167,7 @@ type 可以为 normal 或者 center_control
     + device_sn (optional, string, ``)
     + start_ts (optional, number, ``)
     + end_ts (optional, number, ``)
+    + attrs (optional, string, `weight`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
