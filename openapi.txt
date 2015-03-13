@@ -177,9 +177,9 @@ http://api.gizwits.com
         }" \
         'http://api.gizwits.com/app/users'
 
-### 使用第三方账号（百度/新浪）创建用户 [POST]
+### 使用第三方账号（百度/新浪/QQ）创建用户 [POST]
 
-机智云目前支持使用百度和新浪创建用户，但是需要您在客户端实现 OAuth 授权，获得用户的 uid 和 token，机智云会验证 uid 和 token 的合法性，验证通过就会创建一个机智云帐号。
+机智云目前支持使用百度、新浪和QQ创建用户，但是需要您在客户端实现 OAuth 授权，获得用户的 uid 和 token，机智云会验证 uid 和 token 的合法性，验证通过就会创建一个机智云帐号。如果使用 QQ 创建用户，还需要联系我们的客服，提供您的 QQ 应用 oauth_consumer_key。
 
 + Request (application/json)
 
@@ -191,7 +191,7 @@ http://api.gizwits.com
  
             {   
                 "authData": {
-                    "src": "baidu|sina",
+                    "src": "baidu|sina|qq",
                     "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
                 }
@@ -215,7 +215,7 @@ http://api.gizwits.com
              --header "X-Gizwits-Application-Id: {appid}" \
              --data-binary "{   
             \"authData\": {
-                \"src\": \"baidu|sina|qq\",
+                \"src\": \"baidu\",
                 \"uid\": \"2346677\",
                 \"token\":\"pnktnjyb996sj4p156gjtp4im\"
             }
@@ -692,7 +692,8 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
                     "host": "m2m.gizwits.com",
                     "port": 3128,
                     "remark": "",
-                    "is_disabled": false
+                    "is_disabled": false,
+                    "type": "normal"
                 },{
                     "product_key": "akdlfkad",
                     "did": "abcada",
@@ -702,7 +703,8 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
                     "host": "m2m.gizwits.com",
                     "port": 3128,
                     "remark": "",
-                    "is_disabled": false
+                    "is_disabled": false,
+                    "type": "center_control"
                 }]
             }
 
