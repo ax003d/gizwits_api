@@ -1133,3 +1133,40 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
                 "did2": false
               }
             }
+
+## 错误代码
+
+|code|message|
+|----|:------|
+|9001|mac already registered!|
+|9002|product_key invalid!|
+|9003|appid invalid!|
+|9004|token invalid!|
+|9005|user does not exist!|
+|9006|token expired!|
+|9007|m2m_id invalid|
+|9008|server error|
+|9009|code expired|
+|9010|code invalid|
+|9011|sandbox scale quota exhausted!|
+|9012|production scale quota exhausted!|
+|9013|product has no request scale!|
+|9014|device not found!|
+|9015|form_invalid|
+|9016|did or passcode invalid!|
+|9017|device not bound!|
+|9018|phone unavailable!|
+|9019|username unavailable!|
+|9020|username or password error!|
+|9021|send command failed!|
+|9022|email unavailable!|
+|9023|device is disabled!|
+|9024|fail to notify m2m!|
+|9025|attr invalid!|
+|9026|user invalid!|
+|9027|firmware not found!|
+|9028|JD product info not found!|
+|9029|datapoint data not found!|
+|9030|scheduler not found!|
+|9031|qq oauth key invalid!|
+|9999|reserved|
