@@ -738,6 +738,28 @@ M2M will also call this API to get user bindings.
 
             {}
 
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "attrs": {
+                    "temp": 10,
+                    "humi": 20
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {}
+
 ## Scheduler [/app/scheduler{?limit,skip}]
 
 ### Create Scheduler [POST]

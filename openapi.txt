@@ -898,6 +898,28 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
 
             {}
 
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "attrs": {
+                  "temp": 10,
+                  "humi": 50
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {}
+
 + 请求示例
 
         curl --include \
