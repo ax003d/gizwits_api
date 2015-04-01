@@ -617,7 +617,8 @@ http://api.gizwits.com
 
 获取设备数据点历史数据，包含设备单一数据点的历史数据。可以根据 did 、起始、结束时间以及数据点标识名进行查询。
 
-limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，skip 为跳过多少条数据。limit 最大只能为 100.
+limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，skip 为跳过多少条数据。limit 最大只能为 100。
+
 如每页 10 条数据，获取第一页数据：limit=10, skip=0；获取第二页数据：limit=10, skip=10.
 
 + 参数列表
@@ -669,6 +670,7 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
     + skip (optional, number, `0`)
 
 limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，skip 为跳过多少条数据。
+
 如每页 10 条数据，获取第一页数据：limit=10, skip=0；获取第二页数据：limit=10, skip=10.
 
 + Request (application/json)
