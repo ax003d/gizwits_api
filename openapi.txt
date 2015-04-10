@@ -720,6 +720,10 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
 
 ### 绑定设备 [POST]
 
+passcode 可以通过调用设备详细信息的接口获取到；
+
+remark 用于设置绑定备注，如可以用来给设备起一个容易记住的名字。
+
 + Request (application/json)
 
     + Header
