@@ -472,7 +472,7 @@ History data is ordered by ts descending.
             }
 
 
-## Product history data batch by attr name [/app/devdata2{?product_key,did,start_ts,end_ts,name,limit,skip}]
+## Product history data batch by attr name (Deprecated) [/app/devdata2{?product_key,did,start_ts,end_ts,name,limit,skip}]
 
 History data is ordered by ts descending.
 
@@ -510,6 +510,49 @@ History data is ordered by ts descending.
                     "val": 10
                 }]
             }
+
+
+## Product history data batch [/app/devdata3{?product_key,did,start_ts,end_ts,attrs,limit,skip}]
+
+History data is ordered by ts descending.
+
++ Parameters
+    + product_key (required, string, `pk`)
+    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
+    + start_ts (optional, number, `1349032093`)
+    + end_ts (optional, number, `1349032093`)
+    + attrs (optional, string, `temp`)
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
+### Retrieve product history data batch [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "attrs": {
+                        "temp": 10
+                    }
+                },{
+                    "did": "gdGn7PzAYf4VrhnVag5x8D",
+                    "ts": 148293984328,
+                    "attrs": {
+                        "temp": 10
+                    }
+                }]
+            }
+
 
 ## Device latest data [/app/devdata/{did}/latest]
 
