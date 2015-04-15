@@ -521,7 +521,6 @@ History data is ordered by ts descending.
     + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
     + start_ts (optional, number, `1349032093`)
     + end_ts (optional, number, `1349032093`)
-    + attrs (optional, string, `temp`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
@@ -538,17 +537,26 @@ History data is ordered by ts descending.
     + Body
 
             {
+                "meta": {
+                    "limit": 20,
+                    "skip": 0,
+                    "total": 30,
+                    "previous": false,
+                    "next": true
+                },
                 "data": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "ts": 148293984328,
                     "attrs": {
-                        "temp": 10
+                        "temp": 10,
+                        "humi": 40
                     }
                 },{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "ts": 148293984328,
                     "attrs": {
-                        "temp": 10
+                        "temp": 10,
+                        "humi": 40
                     }
                 }]
             }
