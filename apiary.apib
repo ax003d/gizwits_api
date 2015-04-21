@@ -1209,6 +1209,10 @@ type 可以为 normal 或者 center_control
 
 ## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,attrs,limit,skip}]
 
+ts 为整数，精确到毫秒。
+
+批量上传中，任何一笔数据错误，本次上传失败，不存出任何数据。
+
 ### Save Data [POST]
 
 + Request (application/json)

@@ -179,7 +179,19 @@ http://api.gizwits.com
 
 ### 使用第三方账号（百度/新浪/QQ）创建用户 [POST]
 
-机智云目前支持使用百度、新浪和QQ创建用户，但是需要您在客户端实现 OAuth 授权，获得用户的 uid 和 token，机智云会验证 uid 和 token 的合法性，验证通过就会创建一个机智云帐号。如果使用 QQ 创建用户，还需要联系我们的客服，提供您的 QQ 应用 oauth_consumer_key。
+机智云目前支持使用百度、新浪和QQ创建用户，但是需要您在客户端实现 OAuth 授权，获得用户的 uid 和 token，机智云会验证 uid 和 token 的合法性，验证通过就会创建一个机智云帐号。
+
+#### 关于 QQ 登录
+
+使用 QQ 登录，需要提供您的机智云 APP ID 和 QQ 应用 APP ID 发送给我们的客服，我们客服将会在后台将二者进行关联。
+
+手机客户端使用 QQ SDK 获取到用户的 openid 和 access_token，将 openid 和 access_token 作为 uid 和 token POST 到该接口:
+
+    {
+      "src": "qq",
+      "uid": opendid,
+      "token": access_token
+    }
 
 + Request (application/json)
 
@@ -611,55 +623,6 @@ http://api.gizwits.com
              --header "X-Gizwits-Application-Id: {appid}" \
           'http://api.gizwits.com/app/devdata/gdGn7PzAYf4VrhnVag5x8D/latest'
 
-## 获取设备历史数据 [/app/devdata2]
-
-### 获取设备历史数据 [GET]
-
-获取设备数据点历史数据，包含设备单一数据点的历史数据。可以根据 did 、起始、结束时间以及数据点标识名进行查询。
-
-limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，skip 为跳过多少条数据。limit 最大只能为 100。
-
-如每页 10 条数据，获取第一页数据：limit=10, skip=0；获取第二页数据：limit=10, skip=10.
-
-+ 参数列表
-    + product_key (required, string, `pk`)
-    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
-    + start_ts (optional, number, `1349032093`)
-    + end_ts (optional, number, `1349032093`)
-    + name (optional, string, `temp`)
-    + limit (optional, number, `20`)
-    + skip (optional, number, `0`)
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "data": [{
-                    "did": "gdGn7PzAYf4VrhnVag5x8D",
-                    "ts": 148293984328,
-                    "name": "temp",
-                    "val": 10
-                },{
-                    "did": "gdGn7PzAYf4VrhnVag5x8D",
-                    "ts": 148293984328,
-                    "name": "temp",
-                    "val": 10
-                }]
-            }
-
-+ 请求示例
-
-        curl --include \
-             --header "Content-Type: application/json" \
-             --header "X-Gizwits-Application-Id: {appid}" \
-          'http://api.gizwits.com/app/devdata2?product_key=pk&did=gdGn7PzAYf4VrhnVag5x8D&start_ts=1349032093&end_ts=1349032093&name=temp&limit=20&skip=0'
 
 ## 绑定关系 [/app/bindings]
 
