@@ -188,9 +188,11 @@ http://api.gizwits.com
 手机客户端使用 QQ SDK 获取到用户的 openid 和 access_token，将 openid 和 access_token 作为 uid 和 token POST 到该接口:
 
     {
-      "src": "qq",
-      "uid": opendid,
-      "token": access_token
+        "authData": {
+            "src": "qq",
+            "uid": opendid,
+            "token": access_token
+        }
     }
 
 + Request (application/json)

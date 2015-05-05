@@ -1086,6 +1086,48 @@ type 可以为 normal 或者 center_control
 
             file
 
+## OTA v4.1 - Check Firmware Upgrade [/dev/ota/v4.1/upgrade{?did,type,soft_ver,hard_ver}]
+
+### Check Firmware Upgrade [GET]
+
++ Parameters
+    + did (required, string, `abcada`)
+    + type (required, int, `1`) ... wifi is 1, and mcu is 2
+    + hard_version (required, string, `hv`)
+    + soft_version (required, string, `sv`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Body
+    
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware [/dev/ota/v4.1/download/{id}]
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
 
 ## Get JD+ Product Info [/dev/jd/product/{product_key}]
 
