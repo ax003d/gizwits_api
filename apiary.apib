@@ -1086,17 +1086,22 @@ type 可以为 normal 或者 center_control
 
             file
 
-## OTA v4.1 - Check Firmware Upgrade [/dev/ota/v4.1/upgrade{?did,type,soft_version,hard_version}]
+## OTA v4.1 - Update Firmware Info and Check Latest [/dev/ota/v4.1/update_and_check/{did}]
 
-### Check Firmware Upgrade [GET]
+### Update Firmware Info and Check Latest [POST]
+
++ type
+    + wifi: 1
+    + mcu: 2
 
 + Parameters
     + did (required, string, `abcada`)
-    + type (required, int, `1`) ... wifi is 1, and mcu is 2
-    + hard_version (required, string, `hv`)
-    + soft_version (required, string, `sv`)
 
-+ Request (application/text)
++ Request (application/x-www-form-urlencoded)
+
+    + Body
+
+            passcode=xxx&type=1&hard_version=xxxxxxxxx&soft_version=xxxxxxxx
 
 + Response 200 (application/text)
 
