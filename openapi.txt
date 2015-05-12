@@ -859,8 +859,9 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
     + Body
 
             {
-                "attr": "temp",
-                "val": 10
+                "attrs": {
+                  "temp": 10
+                }
             }
 
 + Response 200 (application/json)
