@@ -900,8 +900,9 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
              --header "X-Gizwits-Application-Id: {appid}" \
              --header "X-Gizwits-User-token: {token}" \
              --data-binary "{
-            \"attr\": \"temp\",
-            \"val\": 10
+            \"attrs\": {
+                \"temp\": 10
+            }
         }" \
         'http://api.gizwits.com/app/control/did'
 
