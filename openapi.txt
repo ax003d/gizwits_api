@@ -472,6 +472,8 @@ http://api.gizwits.com
 
 ### 获取验证码 [POST]
 
+同一手机号 5 分钟内最多只能调用 3 次。
+
 + Request (application/json)
 
     + Header
