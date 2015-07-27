@@ -1,0 +1,71 @@
+FORMAT: 1A
+HOST: http://inner.api.gizwits.com
+
+# Gizwits 内部 API
+
+# Group 产品
+
+## 产品信息 [/products/{product_key}]
+
+### 获取产品信息 [GET]
+
++ Request (application/json)
+
+    + Header
+
+            Authorization: {auth_key}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "name": "Good Product"
+            }
+
+## 产品签名 [/products/{product_key}/verify{?signature}]
+
+### 验证产品签名 [GET]
+
++ Request (application/json)
+
+    + Header
+
+            Authorization: {auth_key}
+            X-Gizwits-Random-Key: 134588932992
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "result": true | false
+            }
+
+# Group 绑定关系
+
+## 根据 did 获取绑定用户 [/bindings/{did}/{?appids}]
+
++ Parameters
+    + did (required, string, `gdGn7PzAYf4VrhnVag5x8D`)
+    + appids (optional, string, `ef15eab984ec44618f6d482155e9a3ff,fd4d66d3e17347fe8db8b58e5279486d`)
+
+### 根据 did 获取绑定用户 [GET]
+
+如果不加 appids 参数，返回与 did 绑定的所有用户;
+否则，只返回指定 app 下与 did 绑定的用户。
+
++ Request (application/text)
+
+    + Header
+
+            Authorization: {auth_key}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+              "appid1": ["uid1", "uid2"],
+              "appid2": ["uid3"]
+            }
