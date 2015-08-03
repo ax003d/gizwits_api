@@ -1197,3 +1197,65 @@ firmware 字段为可选参数。
                     "ts": xxx
                 }]
             }
+
+## Aggregated Data [/bt/agg_data/{?product_key,device_sn,start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
++ Parameters
+    + product_key (required, string, `xxx`)
+    + device_sn (optional, string, ``)
+    + start_ts (required, number, ``)
+    + end_ts (optional, number, ``)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`, `sum,avg,max,min`)
+    + unit (required, string, `DAYS`, `HOURS,DAYS,WEEKS,MONTHS`)
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+attrs 只能为数字类型的数据点。
+返回的 datetime 格式:
+HOURS:  "2015072010"
+DAYS:   "20150720"
+WEEKS:  "201529"
+MONTHS: "201507"
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
