@@ -1202,6 +1202,20 @@ firmware 字段为可选参数。
 
 ### Retrieve Aggregated Data [GET]
 
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
 + Parameters
     + product_key (required, string, `xxx`)
     + device_sn (optional, string, ``)
@@ -1210,14 +1224,6 @@ firmware 字段为可选参数。
     + attrs (required, string, `weight`)
     + aggregator (required, string, `sum`, `sum,avg,max,min`)
     + unit (required, string, `DAYS`, `HOURS,DAYS,WEEKS,MONTHS`)
-
-start_ts 和 end_ts 为带毫秒的整型时间戳。
-attrs 只能为数字类型的数据点。
-返回的 datetime 格式:
-HOURS:  "2015072010"
-DAYS:   "20150720"
-WEEKS:  "201529"
-MONTHS: "201507"
 
 + Request (application/text)
 
