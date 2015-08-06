@@ -179,11 +179,11 @@ Change email PUT email.
 Change phone PUT phone & code.
 
 Other additional fields:
- - name optional, max_length=128
- - gender optional, can be M | F | N
- - birthday optional, 'YYYY-MM-DD' or 'MM-DD'
- - address optional, max_length=256
- - remark optional
+* name optional, max_length=128
+* gender optional, can be M | F | N
+* birthday optional, 'YYYY-MM-DD' or 'MM-DD'
+* address optional, max_length=256
+* remark optional
 
 + request (application/json)
 
@@ -346,7 +346,12 @@ token 正确，返回 200.
                 "username": "abc",
                 "email": "bob@bob.com",
                 "phone": "13850222683",
-                "is_anonymous": true
+                "is_anonymous": true,
+                "name": "Bob",
+                "gender": "M",
+                "birthday": "1990-07-10",
+                "address": "Guangzhou",
+                "remark": "I'm a programmer!"
             }
 
 ## Login [/app/login]
