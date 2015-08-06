@@ -181,7 +181,7 @@ Change phone PUT phone & code.
 Other additional fields:
 * name optional, max_length=128
 * gender optional, can be M | F | N
-* birthday optional, 'YYYY-MM-DD' or 'MM-DD'
+* birthday optional, "YYYY-MM-DD" or "MM-DD"
 * address optional, max_length=256
 * remark optional
 
@@ -453,7 +453,7 @@ If reset password by phone, should call get codes API first.
 
             {
                 "phone": "13232433",
-                "code": "13232',
+                "code": "13232",
                 "new_pwd": "1323200"
             }
 
@@ -557,8 +557,8 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
 
 ### Unbind Devices [DELETE]
@@ -581,8 +581,8 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
 
 
@@ -1366,8 +1366,8 @@ MONTHS: "201507"
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
 
 ### Unbind Devices [DELETE]
@@ -1390,6 +1390,6 @@ MONTHS: "201507"
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
