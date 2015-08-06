@@ -170,7 +170,22 @@ Both anonymous user register & login should call this API.
 
 Anonymous user PUT username & password to become a normal user.
 
-+ Request (application/json)
+Anonymous user PUT phone & code & password to become a normal user.
+
+Change Password PUT old_pwd & new_pwd.
+
+Change email PUT email.
+
+Change phone PUT phone & code.
+
+Other additional fields:
+ - name optional, max_length=128
+ - gender optional, can be M | F | N
+ - birthday optional, 'YYYY-MM-DD' or 'MM-DD'
+ - address optional, max_length=256
+ - remark optional
+
++ request (application/json)
 
     + Header
 
@@ -271,6 +286,34 @@ Anonymous user PUT username & password to become a normal user.
                 "phone": "1328830223",
                 "password": "123456",
                 "code": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "phone": "1328830223",
+                "password": "123456",
+                "code": "123",
+                "name": "Bob",
+                "gender": "M",
+                "birthday": "1990-10-01",
+                "address": "Guangzhou",
+                "remark": "I'm a programmer!"
             }
 
 + Response 200 (application/json)
