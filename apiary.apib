@@ -49,11 +49,11 @@ Both anonymous user register & login should call this API.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-            
+
     + Body
-            
+
             {
                 "phone_id": "apiary"
             }
@@ -61,32 +61,32 @@ Both anonymous user register & login should call this API.
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
-            
+
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "username": "bob",
                 "password": "123456"
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
@@ -94,11 +94,11 @@ Both anonymous user register & login should call this API.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "email": "bob@bob.com",
                 "password": "123456"
@@ -128,40 +128,40 @@ Both anonymous user register & login should call this API.
                 "password": "123456",
                 "code": "abc"
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
 
-            
+
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
- 
-            {   
+
+            {
                 "authData": {
                     "src": "baidu|sina|qq",
                     "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
                 }
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
@@ -211,22 +211,22 @@ Other additional fields:
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-    
+
     + Body
-    
+
             {
                 "old_pwd": "123456",
                 "new_pwd": "123456"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
-            { 
+
+            {
                 "updatedAt": "2011-11-07T21:25:10.623Z"
             }
 
@@ -361,22 +361,22 @@ username can be username or email or phone.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "username": "bob",
                 "password": "123456"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
@@ -496,14 +496,14 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "devices": [{
                     "product_key": "akdlfkad",
@@ -535,12 +535,12 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
     + Body
-    
+
             {
                 "devices": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
@@ -548,7 +548,7 @@ M2M will also call this API to get user bindings.
                     "remark": ""
                 }]
             }
-    
+
 + Response 200 (application/json)
 
            {
@@ -561,18 +561,18 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
     + Body
-    
+
             {
                 "devices": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D"
                 }]
             }
-    
+
 + Response 200 (application/json)
 
            {
@@ -582,7 +582,7 @@ M2M will also call this API to get user bindings.
 
 
 ## Device Detail [/app/devices/{did}]
-    
+
 ### Get Device Info [GET]
 
 + Parameters
@@ -591,14 +591,14 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "product_key": "akdlfkad",
                 "did": "abcada",
@@ -621,13 +621,13 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "did": "abcada",
                 "passcode": "123456"
@@ -644,20 +644,20 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
 
     + Body
-    
+
             {
                 "raw": [<byte>, <byte>, ...]
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {}
 
 ### Set attr val [POST]
@@ -885,14 +885,14 @@ type 可以为 normal 或者 center_control
 + Request (application/x-www-form-urlencoded)
 
     + Body
-        
+
             product_key=d69af59e38c711e4a29d52540052876d&passcode=gokit&mac=112233445566&type=normal
 
-            
+
 + Response 201 (application/text)
 
     + Body
-    
+
             did=gdGn7PzAYf4VrhnVag5x8D
 
 ### Disable Device [DELETE]
@@ -919,7 +919,7 @@ type 可以为 normal 或者 center_control
 + Response 200 (application/text)
 
     + Body
-    
+
             host=m2m.gizwits.com&port=3128&server_ts=1283200300
 
 + Request (application/text)
@@ -927,10 +927,10 @@ type 可以为 normal 或者 center_control
 + Response 200 (application/text)
 
     + Body
-    
+
             host=m2m.gizwits.com&port=3128&server_ts=1283200300&3rd_cloud=jd&product_uuid=xxx
 
-            
+
 ## OTA v4 - Get Target fid [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
 
 ### Get target fid [GET]
@@ -948,7 +948,7 @@ type 可以为 normal 或者 center_control
 + Response 200 (application/text)
 
     + Body
-    
+
             target_fid=2&download_url=http://xxx&firmware_version=xxx
 
 + Request (application/text)
@@ -1000,7 +1000,7 @@ type 可以为 normal 或者 center_control
 + Response 200 (application/text)
 
     + Body
-    
+
             soft_ver=SOFT0001&download_url=http://xxx
 
 
@@ -1070,17 +1070,17 @@ type 可以为 normal 或者 center_control
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "uid": "akkdlfeiow", 
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad"
             }
-            
+
 + Response 401 (application/json)
 
 + Request (application/json)
@@ -1091,12 +1091,12 @@ type 可以为 normal 或者 center_control
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "uid": "akkdlfeiow", 
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad"
             }
-            
+
 + Response 200 (application/json)
 
 ## Verify Device [/m2m/verify/device]
@@ -1106,31 +1106,31 @@ type 可以为 normal 或者 center_control
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "did": "gdGn7PzAYf4VrhnVag5x8D", 
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
                 "passcode": "gokit"
             }
-            
+
 + Response 401 (application/json)
 
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "did": "gdGn7PzAYf4VrhnVag5x8D", 
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
                 "passcode": "gokit"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
@@ -1146,7 +1146,7 @@ type 可以为 normal 或者 center_control
                 }
             }
 
-# Group API for BT/BLE Data
+# Group API for BT/BLE
 
 ## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,attrs,limit,skip}]
 
@@ -1309,3 +1309,82 @@ MONTHS: "201507"
                 }]
             }
 
+## Bindings [/bt/bindings{?limit,skip}]
+
+### Get Bound Devices [GET]
+
+* Parameters
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "devices": [{
+                    "product_key": "akdlfkad",
+                    "device_sn": "abcada",
+                    "remark": "mywatch"
+                }, {
+                    "product_key": "akdlfkad",
+                    "device_sn": "dabc",
+                    "remark": "ring"
+                }]
+            }
+
+### Bind Devices [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "devices": [{
+                    "device_sn": "gdGn7PzAYf4VrhnVag5x8D",
+                    "remark": ""
+                }]
+            }
+
++ Response 200 (application/json)
+
+           {
+                "success": ['abc', 'add'],
+                "failed": ['adad', 'ee']
+           }
+
+### Unbind Devices [DELETE]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "devices": [{
+                    "device_sn": "gdGn7PzAYf4VrhnVag5x8D"
+                }]
+            }
+
++ Response 200 (application/json)
+
+           {
+                "success": ['abc', 'add'],
+                "failed": ['adad', 'ee']
+           }
