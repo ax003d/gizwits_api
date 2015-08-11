@@ -25,6 +25,8 @@ HOST: http://inner.api.gizwits.com/v1
 
 ## 产品签名 [/products/{product_key}/verify{?signature}]
 
+signature = md5(product_secret + random_key)
+
 ### 验证产品签名 [GET]
 
 + Request (application/json)

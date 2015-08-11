@@ -1395,3 +1395,28 @@ MONTHS: "201507"
                 "success": ["abc", "add"],
                 "failed": ["adad", "ee"]
            }
+
+
+## Custom Event [/bt/events]
+
+### Record Event [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "firmware": "1.0",
+                "phone_id": "xxxx",
+                "event": "send_ok",
+                "count": "1"
+            }
+
++ Response 201 (application/json)
