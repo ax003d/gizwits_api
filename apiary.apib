@@ -306,9 +306,6 @@ Other additional fields:
     + Body
 
             {
-                "phone": "1328830223",
-                "password": "123456",
-                "code": "123",
                 "name": "Bob",
                 "gender": "M",
                 "birthday": "1990-10-01",
@@ -666,26 +663,6 @@ M2M will also call this API to get user bindings.
             {}
 
 ### Set attr val [POST]
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-
-    + Body
-
-            {
-                "attr": "temp",
-                "val": 10
-            }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {}
 
 + Request (application/json)
 
@@ -1395,3 +1372,35 @@ MONTHS: "201507"
                 "success": ["abc", "add"],
                 "failed": ["adad", "ee"]
            }
+
+
+## Custom Event [/bt/events]
+
+### Record Event [POST]
+
+* product_key: required
+* device_sn: optional
+* firmware: optional
+* phone_id: optional
+* event: required
+* count: required
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "firmware": "1.0",
+                "phone_id": "xxxx",
+                "event": "send_ok",
+                "count": "1"
+            }
+
++ Response 201 (application/json)
