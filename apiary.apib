@@ -674,26 +674,6 @@ M2M will also call this API to get user bindings.
     + Body
 
             {
-                "attr": "temp",
-                "val": 10
-            }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {}
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-
-    + Body
-
-            {
                 "attrs": {
                     "temp": 10,
                     "humi": 20
