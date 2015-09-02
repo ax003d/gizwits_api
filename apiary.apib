@@ -27,6 +27,8 @@ HOST: http://api.gizwits.com
 | 400    | 9018         | phone unavailable!      |
 | 400    | 9019         | username unavailable!      |
 | 400    | 9020         | username or password error!      |
+| 400    | 9033         | bt firmware unverified, except verify device!      |
+| 400    | 9034         | bt firmware is OK, but nothing to upgrade!      |
 | xxx    | 9999         | reserved      |
 
 ## Error Message
@@ -1245,6 +1247,62 @@ firmware 字段为可选参数。
                     "ts": xxx
                 }]
             }
+
+## Get latest version [/bt/latest{?device_sn,firmware,product_key}]
+
++ Parameters
+    + device_sn (required, string, `sn_xxx`)
+    + product_key (required, string, `xxx`)
+    + firmware (required, string, `v1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "version": "xx",
+                "size": 102420,
+                "download_url": "http://xxx/xxx"
+            }
+
+## Download firmware [/bt/firmware{?uuid,product_key}]
+
++ Parameters
+    + product_key (required, string, `xxx`)
+    + uuid (required, string, `xxxx`)
+
+### Download [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/octet-stream)
+
+    + Header
+
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+            Gizwits-Firmware-MD5: SAD8DS
+            Gizwits-Firmware-Version: V1
+
+    + Body
+
+        binary
+
 
 ## Aggregated Data [/bt/agg_data{?product_key,device_sn,start_ts,end_ts,attrs,aggregator,unit}]
 
