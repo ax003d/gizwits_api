@@ -388,6 +388,30 @@ username can be username or email or phone.
                 "expire_at": 13894002020
             }
 
+## App Token [/app/request_token]
+
+### Generate AppToken [POST]
+
+**Notice:** this API should go via https.
+* signature = MD5(appid+appsecert)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Auth: {signature}
+
+    + Body
+
+            {
+                "token": "XxXXXxxxx",
+                "expired_at": 123333333,
+            }
+
++ Response 200 (application/json)
+
+
 ## Get & Verify Codes [/app/codes]
 
 ### Get & Verify Codes [POST]
@@ -422,9 +446,11 @@ username can be username or email or phone.
 + Response 200 (application/json)
 
 
-## Verify Codes Inner [/app/verify/codes]
+## Verify Codes NEW [/app/verify/codes]
 
-### Get Verify Codes [GET]
+**Notice:** this API should go via https.
+
+### Get captcha Codes [GET]
 
 + Request (application/json)
 
@@ -443,7 +469,7 @@ username can be username or email or phone.
                 "captcha_id": "XXXXXXXxxxxxxx",
             }
 
-### POST Verify Codes [POST]
+### Verify captcha Codes [POST]
 
 + Request (application/json)
 
@@ -462,7 +488,7 @@ username can be username or email or phone.
 
 + Response 201 (application/json)
 
-### PUT Verify Codes [PUT]
+### Verify SMS Codes [PUT]
 
 + Request (application/json)
 
