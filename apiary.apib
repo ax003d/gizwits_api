@@ -5,29 +5,46 @@ HOST: http://api.gizwits.com
 
 ## Error codes
 
-| status |     code     | message |
-|--------|:------------:|--------:|
-| 400    | 9001         | mac already registered!      |
-| 400    | 9002         | product_key invalid      |
-| 400    | 9003         | appid invalid      |
-| 400    | 9004         | token invalid      |
-| 400    | 9005         | user not exist      |
-| 400    | 9006         | token expired      |
-| 400    | 9007         | m2m_id invalid      |
-| 500    | 9008         | server error      |
-| 400    | 9009         | code expired      |
-| 400    | 9010         | code invalid      |
-| 400    | 9011         | sandbox scale quota exhausted!      |
-| 400    | 9012         | production scale quota exhausted!      |
-| 400    | 9013         | product has no request scale!      |
-| 400    | 9014         | device not found!      |
-| 400    | 9015         | form invalid!      |
-| 400    | 9016         | did or passcode invalid!      |
-| 401    | 9017         | device not bound!      |
-| 400    | 9018         | phone unavailable!      |
-| 400    | 9019         | username unavailable!      |
-| 400    | 9020         | username or password error!      |
-| xxx    | 9999         | reserved      |
+| status | code | message                                         |
+|--------|:----:|------------------------------------------------:|
+|    400 | 9001 | mac already registered!                         |
+|    400 | 9002 | product_key invalid                             |
+|    400 | 9003 | appid invalid                                   |
+|    400 | 9004 | token invalid                                   |
+|    400 | 9005 | user not exist                                  |
+|    400 | 9006 | token expired                                   |
+|    400 | 9007 | m2m_id invalid                                  |
+|    500 | 9008 | server error                                    |
+|    400 | 9009 | code expired                                    |
+|    400 | 9010 | code invalid                                    |
+|    400 | 9011 | sandbox scale quota exhausted!                  |
+|    400 | 9012 | production scale quota exhausted!               |
+|    400 | 9013 | product has no request scale!                   |
+|    400 | 9014 | device not found!                               |
+|    400 | 9015 | form invalid!                                   |
+|    400 | 9016 | did or passcode invalid!                        |
+|    401 | 9017 | device not bound!                               |
+|    400 | 9018 | phone unavailable!                              |
+|    400 | 9019 | username unavailable!                           |
+|    400 | 9020 | username or password error!                     |
+|    400 | 9021 | send command failed!                            |
+|    400 | 9022 | email unavailable!                              |
+|    400 | 9023 | device is disabled!                             |
+|    400 | 9024 | fail to notify m2m!                             |
+|    400 | 9025 | attr invalid!                                   |
+|    400 | 9026 | user invalid!                                   |
+|    404 | 9027 | firmware not found!                             |
+|    404 | 9028 | JD product info not found!                      |
+|    400 | 9029 | datapoint data not found!                       |
+|    404 | 9030 | scheduler not found!                            |
+|    400 | 9031 | qq oauth key invalid!                           |
+|    400 | 9032 | ota upgrade service OK, but in idle or disable! |
+|    400 | 9033 | bt firmware unverified, except verify device!   |
+|    404 | 9034 | bt firmware is OK, but nothing to upgrade!      |
+|    500 | 9035 | Save kairosdb error!                            |
+|    400 | 9036 | event not defined!                              |
+|    400 | 9037 | send sms failed!                                |
+|    xxx | 9999 | reserved                                        |
 
 ## Error Message
 
