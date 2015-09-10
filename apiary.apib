@@ -422,6 +422,65 @@ username can be username or email or phone.
 + Response 200 (application/json)
 
 
+## Verify Codes Inner [/app/verify/codes]
+
+### Get Verify Codes [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
+### POST Verify Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
+### PUT Verify Codes [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
+            }
+
++ Response 200 (application/json)
+
+
 ## Request Password Reset [/app/reset_password]
 
 ### Request Password Reset [POST]
