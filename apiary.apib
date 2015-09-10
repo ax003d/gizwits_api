@@ -1035,6 +1035,56 @@ type 可以为 normal 或者 center_control
             file
 
 
+## OTA v4.1 - Get latest version temporary [/dev/ota/v4.1/latest{?hard_version,soft_version,product_key,type}]
+
++ type
+    + wifi: 1
+    + mcu: 2
+
++ Parameters
+    + hard_version (required, string, `HBLF0001`)
+    + soft_version (required, string, `40080001`)
+    + product_key (required, string, `pk`)
+    + type (required, integer, `1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+
++ Response 200 (application/text)
+
+    + Body
+
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware temporary [/dev/ota/v4.1/download?{id}]
+
+* 请使用download_url的值进行访问，这个api只做解释说明用
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
+
 ## Get JD+ Product Info [/dev/jd/product/{product_key}]
 
 ### Get JD+ Product Info [GET]
