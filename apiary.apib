@@ -29,6 +29,7 @@ HOST: http://api.gizwits.com
 | 400    | 9020         | username or password error!      |
 | 400    | 9033         | bt firmware unverified, except verify device!      |
 | 400    | 9034         | bt firmware is OK, but nothing to upgrade!      |
+| 400    | 9038         | signature invalid!      |
 | xxx    | 9999         | reserved      |
 
 ## Error Message
@@ -447,8 +448,6 @@ username can be username or email or phone.
 
 
 ## Verify Codes NEW [/app/verify/codes]
-
-**Notice:** this API should go via https.
 
 ### Get captcha Codes [GET]
 
