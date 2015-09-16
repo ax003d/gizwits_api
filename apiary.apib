@@ -1456,15 +1456,18 @@ WEEKS:  "201529"
 
 MONTHS: "201507"
 
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
 + Parameters
     + product_key (required, string, `xxx`)
-    + device_sn (optional, string, ``)
-    + start_ts (required, number, ``)
-    + end_ts (optional, number, ``)
+    + device_sn (optional, string, `xxxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
     + attrs (required, string, `weight`)
-    + aggregator (required, string, `sum`, `sum,avg,max,min`)
-    + unit (required, string, `DAYS`, `HOURS,DAYS,WEEKS,MONTHS`)
-
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
 + Request (application/text)
 
     + Header
