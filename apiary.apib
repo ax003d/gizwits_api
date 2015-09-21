@@ -394,7 +394,7 @@ username can be username or email or phone.
 ### Generate AppToken [POST]
 
 **Notice:** this API should go via https.
-* signature = MD5(appid+appsecret)
+* signature = MD5(appid+appsecret) 32位小写
 
 + Request (application/json)
 
@@ -958,6 +958,75 @@ M2M will also call this API to get user bindings.
                 "did2": false
               }
             }
+            
+## Aggregated Data [/app/devdata/{did}/agg_data{?start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
++ Parameters
+    + did (required, string, `xxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS",
+                    "did": "xxx"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
+
 
 # Group API for devices
 
@@ -1468,6 +1537,7 @@ unit include [HOURS,DAYS,WEEKS,MONTHS]
     + attrs (required, string, `weight`)
     + aggregator (required, string, `sum`)
     + unit (required, string, `DAYS`)
+
 + Request (application/text)
 
     + Header
