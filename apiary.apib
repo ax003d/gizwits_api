@@ -5,32 +5,48 @@ HOST: http://api.gizwits.com
 
 ## Error codes
 
-| status |     code     | message |
-|--------|:------------:|--------:|
-| 400    | 9001         | mac already registered!      |
-| 400    | 9002         | product_key invalid      |
-| 400    | 9003         | appid invalid      |
-| 400    | 9004         | token invalid      |
-| 400    | 9005         | user not exist      |
-| 400    | 9006         | token expired      |
-| 400    | 9007         | m2m_id invalid      |
-| 500    | 9008         | server error      |
-| 400    | 9009         | code expired      |
-| 400    | 9010         | code invalid      |
-| 400    | 9011         | sandbox scale quota exhausted!      |
-| 400    | 9012         | production scale quota exhausted!      |
-| 400    | 9013         | product has no request scale!      |
-| 400    | 9014         | device not found!      |
-| 400    | 9015         | form invalid!      |
-| 400    | 9016         | did or passcode invalid!      |
-| 401    | 9017         | device not bound!      |
-| 400    | 9018         | phone unavailable!      |
-| 400    | 9019         | username unavailable!      |
-| 400    | 9020         | username or password error!      |
-| 400    | 9033         | bt firmware unverified, except verify device!      |
-| 400    | 9034         | bt firmware is OK, but nothing to upgrade!      |
-| 400    | 9038         | signature invalid!      |
-| xxx    | 9999         | reserved      |
+| status | code | message                                         |
+|--------|:----:|------------------------------------------------:|
+|    400 | 9001 | mac already registered!                         |
+|    400 | 9002 | product_key invalid                             |
+|    400 | 9003 | appid invalid                                   |
+|    400 | 9004 | token invalid                                   |
+|    400 | 9005 | user not exist                                  |
+|    400 | 9006 | token expired                                   |
+|    400 | 9007 | m2m_id invalid                                  |
+|    500 | 9008 | server error                                    |
+|    400 | 9009 | code expired                                    |
+|    400 | 9010 | code invalid                                    |
+|    400 | 9011 | sandbox scale quota exhausted!                  |
+|    400 | 9012 | production scale quota exhausted!               |
+|    400 | 9013 | product has no request scale!                   |
+|    400 | 9014 | device not found!                               |
+|    400 | 9015 | form invalid!                                   |
+|    400 | 9016 | did or passcode invalid!                        |
+|    401 | 9017 | device not bound!                               |
+|    400 | 9018 | phone unavailable!                              |
+|    400 | 9019 | username unavailable!                           |
+|    400 | 9020 | username or password error!                     |
+|    400 | 9021 | send command failed!                            |
+|    400 | 9022 | email unavailable!                              |
+|    400 | 9023 | device is disabled!                             |
+|    400 | 9024 | fail to notify m2m!                             |
+|    400 | 9025 | attr invalid!                                   |
+|    400 | 9026 | user invalid!                                   |
+|    404 | 9027 | firmware not found!                             |
+|    404 | 9028 | JD product info not found!                      |
+|    400 | 9029 | datapoint data not found!                       |
+|    404 | 9030 | scheduler not found!                            |
+|    400 | 9031 | qq oauth key invalid!                           |
+|    400 | 9032 | ota upgrade service OK, but in idle or disable! |
+|    400 | 9033 | bt firmware unverified, except verify device!   |
+|    404 | 9034 | bt firmware is OK, but nothing to upgrade!      |
+|    500 | 9035 | Save kairosdb error!                            |
+|    400 | 9036 | event not defined!                              |
+|    400 | 9037 | send sms failed!                                |
+|    400 | 9038 | signature invalid!                              |
+|    xxx | 9999 | reserved                                        |
+
 
 ## Error Message
 
@@ -309,9 +325,6 @@ Other additional fields:
     + Body
 
             {
-                "phone": "1328830223",
-                "password": "123456",
-                "code": "123",
                 "name": "Bob",
                 "gender": "M",
                 "birthday": "1990-10-01",
@@ -752,26 +765,6 @@ M2M will also call this API to get user bindings.
             {}
 
 ### Set attr val [POST]
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-
-    + Body
-
-            {
-                "attr": "temp",
-                "val": 10
-            }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {}
 
 + Request (application/json)
 
@@ -1590,3 +1583,35 @@ unit include [HOURS,DAYS,WEEKS,MONTHS]
                 "success": ["abc", "add"],
                 "failed": ["adad", "ee"]
            }
+
+
+## Custom Event [/bt/events]
+
+### Record Event [POST]
+
+* product_key: required
+* device_sn: optional
+* firmware: optional
+* phone_id: optional
+* event: required
+* count: required, minimum: 1, maximun: 100
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "firmware": "1.0",
+                "phone_id": "xxxx",
+                "event": "send_ok",
+                "count": 1
+            }
+
++ Response 201 (application/json)
