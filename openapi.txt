@@ -500,7 +500,7 @@ http://api.gizwits.com
              --header "Content-Type: application/json" \
              --header "X-Gizwits-Application-Id: {appid}" \
              --header "X-Gizwits-Application-Auth: {signature}" \
-          'http://api.gizwits.com/app/request_token'
+          'https://api.gizwits.com/app/request_token'
 
 ## 图片验证码 [/app/verify/codes]
 
