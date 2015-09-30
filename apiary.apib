@@ -44,7 +44,9 @@ HOST: http://api.gizwits.com
 |    500 | 9035 | Save kairosdb error!                            |
 |    400 | 9036 | event not defined!                              |
 |    400 | 9037 | send sms failed!                                |
+|    400 | 9038 | signature invalid!                              |
 |    xxx | 9999 | reserved                                        |
+
 
 ## Error Message
 
@@ -517,6 +519,65 @@ username can be username or email or phone.
 
 + Response 200 (application/json)
 
+## Verify Codes NEW [/app/verify/codes]
+
+### Get captcha Codes [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
+### Verify captcha Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
+### Verify SMS Codes [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
+            }
+
++ Response 200 (application/json)
+
+
 ## Request Password Reset [/app/reset_password]
 
 ### Request Password Reset [POST]
@@ -949,6 +1010,75 @@ M2M will also call this API to get user bindings.
                 "did2": false
               }
             }
+            
+## Aggregated Data [/app/devdata/{did}/agg_data{?start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
++ Parameters
+    + did (required, string, `xxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS",
+                    "did": "xxx"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
+
 
 # Group API for devices
 
@@ -1087,6 +1217,56 @@ type 可以为 normal 或者 center_control
 
 
 ## OTA v4.1 - Download Firmware [/dev/ota/v4.1/download/{id}]
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
+
+## OTA v4.1 - Get latest version temporary [/dev/ota/v4.1/latest{?hard_version,soft_version,product_key,type}]
+
++ type
+    + wifi: 1
+    + mcu: 2
+
++ Parameters
+    + hard_version (required, string, `HBLF0001`)
+    + soft_version (required, string, `40080001`)
+    + product_key (required, string, `pk`)
+    + type (required, integer, `1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+
++ Response 200 (application/text)
+
+    + Body
+
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware temporary [/dev/ota/v4.1/download?{id}]
+
+* 请使用download_url的值进行访问，这个api只做解释说明用
 
 ### Download Firmware [GET]
 
@@ -1397,14 +1577,18 @@ WEEKS:  "201529"
 
 MONTHS: "201507"
 
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
 + Parameters
     + product_key (required, string, `xxx`)
-    + device_sn (optional, string, ``)
-    + start_ts (required, number, ``)
-    + end_ts (optional, number, ``)
+    + device_sn (optional, string, `xxxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
     + attrs (required, string, `weight`)
-    + aggregator (required, string, `sum`, `sum,avg,max,min`)
-    + unit (required, string, `DAYS`, `HOURS,DAYS,WEEKS,MONTHS`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
 
 + Request (application/text)
 
