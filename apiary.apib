@@ -5,31 +5,48 @@ HOST: http://api.gizwits.com
 
 ## Error codes
 
-| status |     code     | message |
-|--------|:------------:|--------:|
-| 400    | 9001         | mac already registered!      |
-| 400    | 9002         | product_key invalid      |
-| 400    | 9003         | appid invalid      |
-| 400    | 9004         | token invalid      |
-| 400    | 9005         | user not exist      |
-| 400    | 9006         | token expired      |
-| 400    | 9007         | m2m_id invalid      |
-| 500    | 9008         | server error      |
-| 400    | 9009         | code expired      |
-| 400    | 9010         | code invalid      |
-| 400    | 9011         | sandbox scale quota exhausted!      |
-| 400    | 9012         | production scale quota exhausted!      |
-| 400    | 9013         | product has no request scale!      |
-| 400    | 9014         | device not found!      |
-| 400    | 9015         | form invalid!      |
-| 400    | 9016         | did or passcode invalid!      |
-| 401    | 9017         | device not bound!      |
-| 400    | 9018         | phone unavailable!      |
-| 400    | 9019         | username unavailable!      |
-| 400    | 9020         | username or password error!      |
-| 400    | 9033         | bt firmware unverified, except verify device!      |
-| 400    | 9034         | bt firmware is OK, but nothing to upgrade!      |
-| xxx    | 9999         | reserved      |
+| status | code | message                                         |
+|--------|:----:|------------------------------------------------:|
+|    400 | 9001 | mac already registered!                         |
+|    400 | 9002 | product_key invalid                             |
+|    400 | 9003 | appid invalid                                   |
+|    400 | 9004 | token invalid                                   |
+|    400 | 9005 | user not exist                                  |
+|    400 | 9006 | token expired                                   |
+|    400 | 9007 | m2m_id invalid                                  |
+|    500 | 9008 | server error                                    |
+|    400 | 9009 | code expired                                    |
+|    400 | 9010 | code invalid                                    |
+|    400 | 9011 | sandbox scale quota exhausted!                  |
+|    400 | 9012 | production scale quota exhausted!               |
+|    400 | 9013 | product has no request scale!                   |
+|    400 | 9014 | device not found!                               |
+|    400 | 9015 | form invalid!                                   |
+|    400 | 9016 | did or passcode invalid!                        |
+|    401 | 9017 | device not bound!                               |
+|    400 | 9018 | phone unavailable!                              |
+|    400 | 9019 | username unavailable!                           |
+|    400 | 9020 | username or password error!                     |
+|    400 | 9021 | send command failed!                            |
+|    400 | 9022 | email unavailable!                              |
+|    400 | 9023 | device is disabled!                             |
+|    400 | 9024 | fail to notify m2m!                             |
+|    400 | 9025 | attr invalid!                                   |
+|    400 | 9026 | user invalid!                                   |
+|    404 | 9027 | firmware not found!                             |
+|    404 | 9028 | JD product info not found!                      |
+|    400 | 9029 | datapoint data not found!                       |
+|    404 | 9030 | scheduler not found!                            |
+|    400 | 9031 | qq oauth key invalid!                           |
+|    400 | 9032 | ota upgrade service OK, but in idle or disable! |
+|    400 | 9033 | bt firmware unverified, except verify device!   |
+|    404 | 9034 | bt firmware is OK, but nothing to upgrade!      |
+|    500 | 9035 | Save kairosdb error!                            |
+|    400 | 9036 | event not defined!                              |
+|    400 | 9037 | send sms failed!                                |
+|    400 | 9038 | signature invalid!                              |
+|    xxx | 9999 | reserved                                        |
+
 
 ## Error Message
 
@@ -308,9 +325,6 @@ Other additional fields:
     + Body
 
             {
-                "phone": "1328830223",
-                "password": "123456",
-                "code": "123",
                 "name": "Bob",
                 "gender": "M",
                 "birthday": "1990-10-01",
@@ -388,7 +402,33 @@ username can be username or email or phone.
                 "expire_at": 13894002020
             }
 
+## App Token [/app/request_token]
+
+### Generate AppToken [POST]
+
+**Notice:** this API should go via https.
+* signature = MD5(appid+appsecret) 32位小写
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Auth: {signature}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "token": "XxXXXxxxx",
+                "expired_at": 123333333,
+            }
+
 ## Get & Verify Codes [/app/codes]
+
+*Deprecated*
 
 ### Get & Verify Codes [POST]
 
@@ -417,6 +457,122 @@ username can be username or email or phone.
             {
                 "phone": "13223233",
                 "code": "123456"
+            }
+
++ Response 200 (application/json)
+
+## Verify Codes NEW [/app/verify/codes]
+
+### Get captcha Codes [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
+### Verify captcha Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
+### Verify SMS Codes [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
+            }
+
++ Response 200 (application/json)
+
+## Verify Codes NEW [/app/verify/codes]
+
+### Get captcha Codes [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
+### Verify captcha Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
+### Verify SMS Codes [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
             }
 
 + Response 200 (application/json)
@@ -679,26 +835,6 @@ M2M will also call this API to get user bindings.
     + Body
 
             {
-                "attr": "temp",
-                "val": 10
-            }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {}
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-
-    + Body
-
-            {
                 "attrs": {
                     "temp": 10,
                     "humi": 20
@@ -874,6 +1010,75 @@ M2M will also call this API to get user bindings.
                 "did2": false
               }
             }
+            
+## Aggregated Data [/app/devdata/{did}/agg_data{?start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
++ Parameters
+    + did (required, string, `xxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS",
+                    "did": "xxx"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
+
 
 # Group API for devices
 
@@ -1012,6 +1217,56 @@ type 可以为 normal 或者 center_control
 
 
 ## OTA v4.1 - Download Firmware [/dev/ota/v4.1/download/{id}]
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
+
+## OTA v4.1 - Get latest version temporary [/dev/ota/v4.1/latest{?hard_version,soft_version,product_key,type}]
+
++ type
+    + wifi: 1
+    + mcu: 2
+
++ Parameters
+    + hard_version (required, string, `HBLF0001`)
+    + soft_version (required, string, `40080001`)
+    + product_key (required, string, `pk`)
+    + type (required, integer, `1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+
++ Response 200 (application/text)
+
+    + Body
+
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware temporary [/dev/ota/v4.1/download?{id}]
+
+* 请使用download_url的值进行访问，这个api只做解释说明用
 
 ### Download Firmware [GET]
 
@@ -1322,14 +1577,18 @@ WEEKS:  "201529"
 
 MONTHS: "201507"
 
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
 + Parameters
     + product_key (required, string, `xxx`)
-    + device_sn (optional, string, ``)
-    + start_ts (required, number, ``)
-    + end_ts (optional, number, ``)
+    + device_sn (optional, string, `xxxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
     + attrs (required, string, `weight`)
-    + aggregator (required, string, `sum`, `sum,avg,max,min`)
-    + unit (required, string, `DAYS`, `HOURS,DAYS,WEEKS,MONTHS`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
 
 + Request (application/text)
 
@@ -1453,3 +1712,35 @@ MONTHS: "201507"
                 "success": ["abc", "add"],
                 "failed": ["adad", "ee"]
            }
+
+
+## Custom Event [/bt/events]
+
+### Record Event [POST]
+
+* product_key: required
+* device_sn: optional
+* firmware: optional
+* phone_id: optional
+* event: required
+* count: required, minimum: 1, maximun: 100
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "firmware": "1.0",
+                "phone_id": "xxxx",
+                "event": "send_ok",
+                "count": 1
+            }
+
++ Response 201 (application/json)
