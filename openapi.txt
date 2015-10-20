@@ -468,25 +468,30 @@ http://api.gizwits.com
         }" \
         'http://api.gizwits.com/app/login'
 
-## 验证码 [/app/codes]
 
-### 获取验证码 [POST]
+## 获取 App Token [/app/request_token]
 
-同一手机号 5 分钟内最多只能调用 3 次。
+### 获取 App Token [POST]
+
+* 请使用 https 调用本接口*
+* signature 的算法: signature = MD5(appid+appsecret) 32位小写
 
 + Request (application/json)
 
     + Header
 
             X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Auth: {signature}
+
+
++ Response 200 (application/json)
 
     + Body
 
             {
-                "phone": "13223233"
+                "token": "XxXXXxxxx",
+                "expired_at": 123333333,
             }
-
-+ Response 200 (application/json)
 
 + 请求示例
 
@@ -494,24 +499,85 @@ http://api.gizwits.com
              --request POST \
              --header "Content-Type: application/json" \
              --header "X-Gizwits-Application-Id: {appid}" \
-             --data-binary "{
-            \"phone\": \"13223233\"
-        }" \
-        'http://api.gizwits.com/app/codes'
+             --header "X-Gizwits-Application-Auth: {signature}" \
+          'https://api.gizwits.com/app/request_token'
 
-### 校验验证码 [POST]
+## 图片验证码 [/app/verify/codes]
+
+### 获取图片验证码 [GET]
 
 + Request (application/json)
 
     + Header
 
             X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
 
     + Body
 
             {
-                "phone": "13223233",
-                "code": "123456"
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
++ 请求示例
+
+        curl --include \
+             --header "Content-Type: application/json" \
+             --header "X-Gizwits-Application-Id: {appid}" \
+             --header "X-Gizwits-Application-Token: {token}" \
+          'http://api.gizwits.com/app/verify/codes'
+
+### 发送手机短信验证码 [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
++ 请求示例
+
+        Try curl --include \
+             --request POST \
+             --header "Content-Type: application/json" \
+             --header "X-Gizwits-Application-Id: {appid}" \
+             --header "X-Gizwits-Application-Token: {token}" \
+             --data-binary "{
+            \"captcha_id\": \"XXXXXXXxxxxxxx\",
+            \"captcha_code\": \"123123\",
+            \"phone\": \"123123123\"
+        }" \
+        'http://api.gizwits.com/app/verify/codes'
+
+### 校验短信验证码 [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
             }
 
 + Response 200 (application/json)
@@ -519,14 +585,15 @@ http://api.gizwits.com
 + 请求示例
 
         curl --include \
-             --request POST \
+             --request PUT \
              --header "Content-Type: application/json" \
              --header "X-Gizwits-Application-Id: {appid}" \
+             --header "X-Gizwits-Application-Token: {token}" \
              --data-binary "{
-            \"phone\": \"13223233\",
-            \"code\": \"123456\"
+            \"sms_code\": \"123xx\",
+            \"phone\": \"123123123\"
         }" \
-        'http://api.gizwits.com/app/codes'
+        'http://api.gizwits.com/app/verify/codes'
 
 ## 重置密码 [/app/reset_password]
 
