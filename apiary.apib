@@ -367,6 +367,7 @@ token 正确，返回 200.
                 "gender": "M",
                 "birthday": "1990-07-10",
                 "address": "Guangzhou",
+                "lang": "zh-cn",
                 "remark": "I'm a programmer!"
             }
 
@@ -377,6 +378,7 @@ token 正确，返回 200.
 **Notice:** this API should go via https.
 
 username can be username or email or phone.
+lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
 
 
 + Request (application/json)
@@ -389,7 +391,8 @@ username can be username or email or phone.
 
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 200 (application/json)

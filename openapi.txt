@@ -836,72 +836,6 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
         }" \
         'http://api.gizwits.com/app/bindings'
 
-## 设备信息 [/app/devices/{did}]
-
-### 获取设备详细信息 [GET]
-
-+ 参数列表
-    + did (required, string, `abcada`)
-
-+ Request (application/json)
-
-    + Header
-    
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "product_key": "akdlfkad",
-                "did": "abcada",
-                "mac": "1122334455667788",
-                "is_online": false,
-                "passcode": "123456",
-                "host": "m2m.gizwits.com",
-                "port": "3128"
-            }
-
-+ 请求示例
-
-        curl --include \
-             --header "Content-Type: application/json" \
-             --header "X-Gizwits-Application-Id: {appid}" \
-             --header "X-Gizwits-User-token: {token}" \
-          'http://api.gizwits.com/app/devices/abcada'
-
-## 查询设备 [/app/devices]
-
-### 根据 product_key 和 mac 查询设备 [GET]
-
-+ 参数列表
-    + product_key (required, string, `product_key`)
-    + mac (required, string, `112233445566`)
-
-+ Request (application/json)
-
-    + Header
-    
-            X-Gizwits-Application-Id: {appid}
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "did": "abcada",
-                "passcode": "123456",
-            }
-
-+ 请求示例
-
-        curl --include \
-             --header "Content-Type: application/json" \
-             --header "X-Gizwits-Application-Id: {appid}" \
-          'http://api.gizwits.com/app/devices?product_key=product_key&mac=112233445566'
-
 ## 远程控制设备 [/app/control/{did}]
 
 远程控制设备可以通过两种方式，一种是设置数据点，一种是发送原始控制指令。
@@ -916,7 +850,9 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
 * bool 类型的数据点设置为 true/false
 * enum 类型的数据点设置为枚举的字符串
 * uint8/uint16/uint32 类型的数据点设置为数字
-* binary 类型的数据设置为 hex 类型字符串，如发送一串二进制数据 0x01, 0x02, 0x03, 就写成 "010203"
+* binary 类型的数据设置为 hex 类型字符串，如发送一串十六进制数据 0x01, 0x02, 0x03, 就写成 "010203";
+  如果 binary 类型本身为字符串，如 "hello world!"，需将字符串每个字符的 ASCII 转成十六进制再发送，本例为 "68656c6c6f20776f726c6421";
+  **注意 binary 类型定义了多少长度，就需要发多少长度的数据**。
 
 + Request (application/json)
 
