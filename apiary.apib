@@ -65,6 +65,8 @@ HOST: http://api.gizwits.com
 
 Both anonymous user register & login should call this API.
 
+lang: optional, can be "en", "zh-cn".
+
 + Request (application/json)
 
     + Header
@@ -74,7 +76,8 @@ Both anonymous user register & login should call this API.
     + Body
 
             {
-                "phone_id": "apiary"
+                "phone_id": "apiary",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -97,7 +100,8 @@ Both anonymous user register & login should call this API.
 
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -120,7 +124,8 @@ Both anonymous user register & login should call this API.
 
             {
                 "email": "bob@bob.com",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -145,7 +150,8 @@ Both anonymous user register & login should call this API.
             {
                 "phone": "123456",
                 "password": "123456",
-                "code": "abc"
+                "code": "abc",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -172,7 +178,8 @@ Both anonymous user register & login should call this API.
                     "src": "baidu|sina|qq",
                     "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
-                }
+                },
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -202,6 +209,7 @@ Other additional fields:
 * gender optional, can be M | F | N
 * birthday optional, "YYYY-MM-DD" or "MM-DD"
 * address optional, max_length=256
+* lang optional, can be "en" | "zh-cn"
 * remark optional
 
 + request (application/json)
@@ -329,6 +337,7 @@ Other additional fields:
                 "gender": "M",
                 "birthday": "1990-10-01",
                 "address": "Guangzhou",
+                "lang": "zh-cn",
                 "remark": "I'm a programmer!"
             }
 
@@ -487,6 +496,8 @@ lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
 
 ### Verify captcha Codes [POST]
 
+* lang: optional
+
 + Request (application/json)
 
     + Header
@@ -499,7 +510,8 @@ lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
             {
                 "captcha_id": "XXXXXXXxxxxxxx",
                 "captcha_code": "123123",
-                "phone": "123123123"
+                "phone": "123123123",
+                "lang": "zh-cn"
             }
 
 + Response 201 (application/json)
