@@ -747,6 +747,31 @@ M2M will also call this API to get user bindings.
            }
 
 
+## Bind latest [/app/bind_latest]
+
+### Bind by QR content [POST]
+response 201 new bind, response 200 already bound
+
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+               "qr_content": "qr_content"
+            }
+
+
++ Response 201 (application/json)
+
++ Response 200 (application/json)
+
+
 ## Device Detail [/app/devices/{did}]
 
 ### Get Device Info [GET]
