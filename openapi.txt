@@ -473,7 +473,7 @@ http://api.gizwits.com
 
 ### 获取 App Token [POST]
 
-* 请使用 https 调用本接口*
+* 请使用 *https* 调用本接口
 * signature 的算法: signature = MD5(appid+appsecret) 32位小写
 
 + Request (application/json)
@@ -496,6 +496,7 @@ http://api.gizwits.com
 + 请求示例
 
         curl --include \
+             --insecure \
              --request POST \
              --header "Content-Type: application/json" \
              --header "X-Gizwits-Application-Id: {appid}" \
