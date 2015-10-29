@@ -496,8 +496,6 @@ lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
 
 ### Verify captcha Codes [POST]
 
-* lang: optional
-
 + Request (application/json)
 
     + Header
@@ -510,8 +508,7 @@ lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
             {
                 "captcha_id": "XXXXXXXxxxxxxx",
                 "captcha_code": "123123",
-                "phone": "123123123",
-                "lang": "zh-cn"
+                "phone": "123123123"
             }
 
 + Response 201 (application/json)
