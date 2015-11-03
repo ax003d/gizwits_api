@@ -65,6 +65,8 @@ HOST: http://api.gizwits.com
 
 Both anonymous user register & login should call this API.
 
+lang: optional, can be "en", "zh-cn".
+
 + Request (application/json)
 
     + Header
@@ -74,7 +76,8 @@ Both anonymous user register & login should call this API.
     + Body
 
             {
-                "phone_id": "apiary"
+                "phone_id": "apiary",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -97,7 +100,8 @@ Both anonymous user register & login should call this API.
 
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -120,7 +124,8 @@ Both anonymous user register & login should call this API.
 
             {
                 "email": "bob@bob.com",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -145,7 +150,8 @@ Both anonymous user register & login should call this API.
             {
                 "phone": "123456",
                 "password": "123456",
-                "code": "abc"
+                "code": "abc",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -172,7 +178,8 @@ Both anonymous user register & login should call this API.
                     "src": "baidu|sina|qq",
                     "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
-                }
+                },
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -202,6 +209,7 @@ Other additional fields:
 * gender optional, can be M | F | N
 * birthday optional, "YYYY-MM-DD" or "MM-DD"
 * address optional, max_length=256
+* lang optional, can be "en" | "zh-cn"
 * remark optional
 
 + request (application/json)
@@ -329,6 +337,7 @@ Other additional fields:
                 "gender": "M",
                 "birthday": "1990-10-01",
                 "address": "Guangzhou",
+                "lang": "zh-cn",
                 "remark": "I'm a programmer!"
             }
 
@@ -367,6 +376,7 @@ token 正确，返回 200.
                 "gender": "M",
                 "birthday": "1990-07-10",
                 "address": "Guangzhou",
+                "lang": "zh-cn",
                 "remark": "I'm a programmer!"
             }
 
@@ -377,6 +387,7 @@ token 正确，返回 200.
 **Notice:** this API should go via https.
 
 username can be username or email or phone.
+lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
 
 
 + Request (application/json)
@@ -389,7 +400,8 @@ username can be username or email or phone.
 
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 200 (application/json)
@@ -518,65 +530,6 @@ username can be username or email or phone.
             }
 
 + Response 200 (application/json)
-
-## Verify Codes NEW [/app/verify/codes]
-
-### Get captcha Codes [GET]
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-Application-Token: {token}
-
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "captcha_url": "http://xxxxx",
-                "captcha_id": "XXXXXXXxxxxxxx",
-            }
-
-### Verify captcha Codes [POST]
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-Application-Token: {token}
-
-    + Body
-
-            {
-                "captcha_id": "XXXXXXXxxxxxxx",
-                "captcha_code": "123123",
-                "phone": "123123123"
-            }
-
-+ Response 201 (application/json)
-
-### Verify SMS Codes [PUT]
-
-+ Request (application/json)
-
-    + Header
-
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-Application-Token: {token}
-
-    + Body
-
-            {
-                "sms_code": "123xx",
-                "phone": "123123123"
-            }
-
-+ Response 200 (application/json)
-
 
 ## Request Password Reset [/app/reset_password]
 
