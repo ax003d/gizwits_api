@@ -724,6 +724,34 @@ response 201 new bind, response 200 already bound
 
 + Response 200 (application/json)
 
+## Bind Mac [/app/bind_mac]
+
+### Bind by Mac [POST]
+
+X-Gizwits-Timestamp 与服务器相差不能超过 5 分钟
+X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            X-Gizwits-Timestamp: {req_ts}
+            X-Gizwits-Signature: {sig}
+
+    + Body
+
+            {
+               "product_key": "xxx",
+               "mac": "xxx",
+               "remark": "xxx",
+               "dev_alias": "xxx"
+            }
+
+
++ Response 201 (application/json)
+
 
 ## Device Detail [/app/devices/{did}]
 
