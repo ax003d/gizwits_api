@@ -6,7 +6,7 @@ HOST: http://api.gizwits.com
 ## Error codes
 
 | status | code | message                                         |
-|--------|:----:|------------------------------------------------:|
+|--------+------+-------------------------------------------------|
 |    400 | 9001 | mac already registered!                         |
 |    400 | 9002 | product_key invalid                             |
 |    400 | 9003 | appid invalid                                   |
@@ -45,6 +45,13 @@ HOST: http://api.gizwits.com
 |    400 | 9036 | event not defined!                              |
 |    400 | 9037 | send sms failed!                                |
 |    400 | 9038 | signature invalid!                              |
+|    403 | 9039 | Not allowed to call deprecated API!             |
+|    400 | 9040 | bad qrcode content!                             |
+|    429 | 9041 | request was throttled                           |
+|    400 | 9042 | device offline!                                 |
+|    400 | 9043 | 'X-Gizwits-Timestamp invalid!                   |
+|    400 | 9044 | X-Gizwits-Signature invalid!                    |
+|    400 | 9045 | API deprecated!                                 |
 |    xxx | 9999 | reserved                                        |
 
 

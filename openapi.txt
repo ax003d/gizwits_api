@@ -696,6 +696,51 @@ http://api.gizwits.com
           'http://api.gizwits.com/app/devdata/gdGn7PzAYf4VrhnVag5x8D/latest'
 
 
+## 绑定设备 [/app/bind_mac]
+
+### 绑定设备 [POST]
+
+X-Gizwits-Timestamp 与服务器相差不能超过 5 分钟
+X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            X-Gizwits-Timestamp: {req_ts}
+            X-Gizwits-Signature: {sig}
+
+    + Body
+
+            {
+               "product_key": "xxx",
+               "mac": "xxx",
+               "remark": "xxx",
+               "dev_alias": "xxx"
+            }
+
+
++ Response 201 (application/json)
+
++ 请求示例
+
+        curl --include \
+             --request POST \
+             --header "Content-Type: application/json" \
+             --header "X-Gizwits-Application-Id: {appid}" \
+             --header "X-Gizwits-User-token: {token}" \
+             --header "X-Gizwits-Timestamp: {req_ts}" \
+             --header "X-Gizwits-Signature: {sig}" \
+             --data-binary "{
+           \"product_key\": \"xxx\",
+           \"mac\": \"xxx\",
+           \"remark\": \"xxx\",
+           \"dev_alias\": \"xxx\"
+        }" \
+        'http://api.gizwits.com/app/bind_mac'
+
 ## 绑定关系 [/app/bindings]
 
 ### 获取绑定列表 [GET]
@@ -730,7 +775,8 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
                     "port": 3128,
                     "remark": "",
                     "is_disabled": false,
-                    "type": "normal"
+                    "type": "normal",
+                    "dev_alias": "dev1"
                 },{
                     "product_key": "akdlfkad",
                     "did": "abcada",
@@ -741,7 +787,8 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
                     "port": 3128,
                     "remark": "",
                     "is_disabled": false,
-                    "type": "center_control"
+                    "type": "center_control",
+                    "dev_alias": "dev2"
                 }]
             }
 
@@ -753,11 +800,12 @@ limit 和 skip 表示分页参数。limit 为一次性返回的最多条数，sk
              --header "X-Gizwits-User-token: {token}" \
           'http://api.gizwits.com/app/bindings?show_disabled=1&limit=20&skip=0'
 
-### 绑定设备 [POST]
+### 绑定设备: 通过 did + passcode [POST]
 
-passcode 可以通过调用设备详细信息的接口获取到；
+使用该接口适合知道 did 和 passcode 的情况。
 
-remark 用于设置绑定备注，如可以用来给设备起一个容易记住的名字。
+dev_alias 设备别名，用于当前用户对该设备起一个别名，仅该用户可见。
+remark 用于设置备注信息。
 
 + Request (application/json)
 
@@ -772,7 +820,8 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
                 "devices": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "passcode": "gokit",
-                    "remark": ""
+                    "remark": ""，      
+                    "dev_alias": "my_dev"
                 }]
             }
     
@@ -794,7 +843,8 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
             \"devices\": [{
                 \"did\": \"gdGn7PzAYf4VrhnVag5x8D\",
                 \"passcode\": \"gokit\",
-                \"remark\": \"\"
+                \"remark\": \"\",
+                \"dev_alias\": \"\"
             }]
         }" \
         'http://api.gizwits.com/app/bindings'
@@ -1137,37 +1187,51 @@ remark 用于设置绑定备注，如可以用来给设备起一个容易记住�
 
 ## 错误代码
 
-|code|message|
-|----|:------|
-|9001|mac already registered!|
-|9002|product_key invalid!|
-|9003|appid invalid!|
-|9004|token invalid!|
-|9005|user does not exist!|
-|9006|token expired!|
-|9007|m2m_id invalid|
-|9008|server error|
-|9009|code expired|
-|9010|code invalid|
-|9011|sandbox scale quota exhausted!|
-|9012|production scale quota exhausted!|
-|9013|product has no request scale!|
-|9014|device not found!|
-|9015|form_invalid|
-|9016|did or passcode invalid!|
-|9017|device not bound!|
-|9018|phone unavailable!|
-|9019|username unavailable!|
-|9020|username or password error!|
-|9021|send command failed!|
-|9022|email unavailable!|
-|9023|device is disabled!|
-|9024|fail to notify m2m!|
-|9025|attr invalid!|
-|9026|user invalid!|
-|9027|firmware not found!|
-|9028|JD product info not found!|
-|9029|datapoint data not found!|
-|9030|scheduler not found!|
-|9031|qq oauth key invalid!|
-|9999|reserved|
+| status | code | message                                         |
+|--------|:----:|-------------------------------------------------|
+|    400 | 9001 | mac already registered!                         |
+|    400 | 9002 | product_key invalid                             |
+|    400 | 9003 | appid invalid                                   |
+|    400 | 9004 | token invalid                                   |
+|    400 | 9005 | user not exist                                  |
+|    400 | 9006 | token expired                                   |
+|    400 | 9007 | m2m_id invalid                                  |
+|    500 | 9008 | server error                                    |
+|    400 | 9009 | code expired                                    |
+|    400 | 9010 | code invalid                                    |
+|    400 | 9011 | sandbox scale quota exhausted!                  |
+|    400 | 9012 | production scale quota exhausted!               |
+|    400 | 9013 | product has no request scale!                   |
+|    404 | 9014 | device not found!                               |
+|    400 | 9015 | form invalid!                                   |
+|    400 | 9016 | did or passcode invalid!                        |
+|    401 | 9017 | device not bound!                               |
+|    400 | 9018 | phone unavailable!                              |
+|    400 | 9019 | username unavailable!                           |
+|    400 | 9020 | username or password error!                     |
+|    400 | 9021 | send command failed!                            |
+|    400 | 9022 | email unavailable!                              |
+|    400 | 9023 | device is disabled!                             |
+|    400 | 9024 | fail to notify m2m!                             |
+|    400 | 9025 | attr invalid!                                   |
+|    400 | 9026 | user invalid!                                   |
+|    404 | 9027 | firmware not found!                             |
+|    404 | 9028 | JD product info not found!                      |
+|    400 | 9029 | datapoint data not found!                       |
+|    404 | 9030 | scheduler not found!                            |
+|    400 | 9031 | qq oauth key invalid!                           |
+|    400 | 9032 | ota upgrade service OK, but in idle or disable! |
+|    400 | 9033 | bt firmware unverified, except verify device!   |
+|    404 | 9034 | bt firmware is OK, but nothing to upgrade!      |
+|    500 | 9035 | Save kairosdb error!                            |
+|    400 | 9036 | event not defined!                              |
+|    400 | 9037 | send sms failed!                                |
+|    400 | 9038 | signature invalid!                              |
+|    403 | 9039 | Not allowed to call deprecated API!             |
+|    400 | 9040 | bad qrcode content!                             |
+|    429 | 9041 | request was throttled                           |
+|    400 | 9042 | device offline!                                 |
+|    400 | 9043 | 'X-Gizwits-Timestamp invalid!                   |
+|    400 | 9044 | X-Gizwits-Signature invalid!                    |
+|    400 | 9045 | API deprecated!                                 |
+|    xxx | 9999 | reserved                                        |
