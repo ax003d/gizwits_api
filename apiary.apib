@@ -886,6 +886,48 @@ M2M will also call this API to get user bindings.
                 }
             }
 
+## Product Throttle [/m2m/product/msg_throttle]
+
+### Product Throttle List [GET]
+
+* Parameters
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+    + updated_at (required, number, `1458542963`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-M2M-Id: {m2m_id}
+
++ Response 200 (application/json)
+
+    + Body
+
+           {
+            "meta": {
+                "pre": "/m2m/product/msg_throttle?skip=0&limit=2&updated_at=12",
+                "limit": 2,
+                "skip": 1,
+                "total": 6,
+                "updated_at": 12,
+                "next": "/m2m/product/msg_throttle?skip=3&limit=2&updated_at=12"
+            },
+            "objects": [
+                {
+                    "time_scope": 60,
+                    "quota": 30,
+                    "product_key": "64e5a7d5bab348259d5d7bc2ab2bcb5a",
+                    "updated_at": 1458291295
+                },
+                {"time_scope": 60,
+                 "quota": 30,
+                 "product_key": "37b53e763ff842329cf524b8b3d831d6",
+                "updated_at": 1458291604}
+            ]}
+
+
 # Group API for BT/BLE Data
 
 ## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,limit,skip}]
