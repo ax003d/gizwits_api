@@ -5,29 +5,55 @@ HOST: http://api.gizwits.com
 
 ## Error codes
 
-| status |     code     | message |
-|--------|:------------:|--------:|
-| 400    | 9001         | mac already registered!      |
-| 400    | 9002         | product_key invalid      |
-| 400    | 9003         | appid invalid      |
-| 400    | 9004         | token invalid      |
-| 400    | 9005         | user not exist      |
-| 400    | 9006         | token expired      |
-| 400    | 9007         | m2m_id invalid      |
-| 500    | 9008         | server error      |
-| 400    | 9009         | code expired      |
-| 400    | 9010         | code invalid      |
-| 400    | 9011         | sandbox scale quota exhausted!      |
-| 400    | 9012         | production scale quota exhausted!      |
-| 400    | 9013         | product has no request scale!      |
-| 400    | 9014         | device not found!      |
-| 400    | 9015         | form invalid!      |
-| 400    | 9016         | did or passcode invalid!      |
-| 401    | 9017         | device not bound!      |
-| 400    | 9018         | phone unavailable!      |
-| 400    | 9019         | username unavailable!      |
-| 400    | 9020         | username or password error!      |
-| xxx    | 9999         | reserved      |
+| status | code | message                                         |
+|--------+------+-------------------------------------------------|
+|    400 | 9001 | mac already registered!                         |
+|    400 | 9002 | product_key invalid                             |
+|    400 | 9003 | appid invalid                                   |
+|    400 | 9004 | token invalid                                   |
+|    400 | 9005 | user not exist                                  |
+|    400 | 9006 | token expired                                   |
+|    400 | 9007 | m2m_id invalid                                  |
+|    500 | 9008 | server error                                    |
+|    400 | 9009 | code expired                                    |
+|    400 | 9010 | code invalid                                    |
+|    400 | 9011 | sandbox scale quota exhausted!                  |
+|    400 | 9012 | production scale quota exhausted!               |
+|    400 | 9013 | product has no request scale!                   |
+|    404 | 9014 | device not found!                               |
+|    400 | 9015 | form invalid!                                   |
+|    400 | 9016 | did or passcode invalid!                        |
+|    401 | 9017 | device not bound!                               |
+|    400 | 9018 | phone unavailable!                              |
+|    400 | 9019 | username unavailable!                           |
+|    400 | 9020 | username or password error!                     |
+|    400 | 9021 | send command failed!                            |
+|    400 | 9022 | email unavailable!                              |
+|    400 | 9023 | device is disabled!                             |
+|    400 | 9024 | fail to notify m2m!                             |
+|    400 | 9025 | attr invalid!                                   |
+|    400 | 9026 | user invalid!                                   |
+|    404 | 9027 | firmware not found!                             |
+|    404 | 9028 | JD product info not found!                      |
+|    400 | 9029 | datapoint data not found!                       |
+|    404 | 9030 | scheduler not found!                            |
+|    400 | 9031 | qq oauth key invalid!                           |
+|    400 | 9032 | ota upgrade service OK, but in idle or disable! |
+|    400 | 9033 | bt firmware unverified, except verify device!   |
+|    404 | 9034 | bt firmware is OK, but nothing to upgrade!      |
+|    500 | 9035 | Save kairosdb error!                            |
+|    400 | 9036 | event not defined!                              |
+|    400 | 9037 | send sms failed!                                |
+|    400 | 9038 | signature invalid!                              |
+|    403 | 9039 | Not allowed to call deprecated API!             |
+|    400 | 9040 | bad qrcode content!                             |
+|    429 | 9041 | request was throttled                           |
+|    400 | 9042 | device offline!                                 |
+|    400 | 9043 | 'X-Gizwits-Timestamp invalid!                   |
+|    400 | 9044 | X-Gizwits-Signature invalid!                    |
+|    400 | 9045 | API deprecated!                                 |
+|    xxx | 9999 | reserved                                        |
+
 
 ## Error Message
 
@@ -46,47 +72,51 @@ HOST: http://api.gizwits.com
 
 Both anonymous user register & login should call this API.
 
+lang: optional, can be "en", "zh-cn".
+
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-            
+
     + Body
-            
+
             {
-                "phone_id": "apiary"
+                "phone_id": "apiary",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
-            
+
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
@@ -94,14 +124,15 @@ Both anonymous user register & login should call this API.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "email": "bob@bob.com",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
 
 + Response 201 (application/json)
@@ -126,42 +157,44 @@ Both anonymous user register & login should call this API.
             {
                 "phone": "123456",
                 "password": "123456",
-                "code": "abc"
+                "code": "abc",
+                "lang": "en"
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
 
-            
+
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
- 
-            {   
+
+            {
                 "authData": {
                     "src": "baidu|sina|qq",
                     "uid": "2346677",
                     "token":"pnktnjyb996sj4p156gjtp4im"
-                }
+                },
+                "lang": "en"
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
@@ -170,7 +203,23 @@ Both anonymous user register & login should call this API.
 
 Anonymous user PUT username & password to become a normal user.
 
-+ Request (application/json)
+Anonymous user PUT phone & code & password to become a normal user.
+
+Change Password PUT old_pwd & new_pwd.
+
+Change email PUT email.
+
+Change phone PUT phone & code.
+
+Other additional fields:
+* name optional, max_length=128
+* gender optional, can be M | F | N
+* birthday optional, "YYYY-MM-DD" or "MM-DD"
+* address optional, max_length=256
+* lang optional, can be "en" | "zh-cn"
+* remark optional
+
++ request (application/json)
 
     + Header
 
@@ -196,22 +245,22 @@ Anonymous user PUT username & password to become a normal user.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-    
+
     + Body
-    
+
             {
                 "old_pwd": "123456",
                 "new_pwd": "123456"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
-            { 
+
+            {
                 "updatedAt": "2011-11-07T21:25:10.623Z"
             }
 
@@ -225,7 +274,7 @@ Anonymous user PUT username & password to become a normal user.
     + Body
 
             {
-                "email": "bob@bob.com",
+                "email": "bob@bob.com"
             }
 
 + Response 200 (application/json)
@@ -281,6 +330,62 @@ Anonymous user PUT username & password to become a normal user.
                 "updatedAt": "2011-11-07T21:25:10.623Z"
             }
 
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "name": "Bob",
+                "gender": "M",
+                "birthday": "1990-10-01",
+                "address": "Guangzhou",
+                "lang": "zh-cn",
+                "remark": "I'm a programmer!"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "updatedAt": "2011-11-07T21:25:10.623Z"
+            }
+
+### 获取用户信息 [GET]
+
+token 不存在，返回 400.
+token 过期，返回 错误信息.
+token 正确，返回 200.
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "uid": "akkdlfeiow",
+                "username": "abc",
+                "email": "bob@bob.com",
+                "phone": "13850222683",
+                "is_anonymous": true,
+                "name": "Bob",
+                "gender": "M",
+                "birthday": "1990-07-10",
+                "address": "Guangzhou",
+                "lang": "zh-cn",
+                "remark": "I'm a programmer!"
+            }
 
 ## Login [/app/login]
 
@@ -289,32 +394,60 @@ Anonymous user PUT username & password to become a normal user.
 **Notice:** this API should go via https.
 
 username can be username or email or phone.
+lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
 
 
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-    
+
     + Body
-    
+
             {
                 "username": "bob",
-                "password": "123456"
+                "password": "123456",
+                "lang": "en"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
-            { 
-                "uid": "akkdlfeiow", 
+
+            {
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad",
                 "expire_at": 13894002020
             }
 
+## App Token [/app/request_token]
+
+### Generate AppToken [POST]
+
+**Notice:** this API should go via https.
+* signature = MD5(appid+appsecret) 32位小写
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Auth: {signature}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "token": "XxXXXxxxx",
+                "expired_at": 123333333,
+            }
+
 ## Get & Verify Codes [/app/codes]
+
+*Deprecated*
 
 ### Get & Verify Codes [POST]
 
@@ -347,6 +480,63 @@ username can be username or email or phone.
 
 + Response 200 (application/json)
 
+## Verify Codes NEW [/app/verify/codes]
+
+### Get captcha Codes [GET]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "captcha_url": "http://xxxxx",
+                "captcha_id": "XXXXXXXxxxxxxx",
+            }
+
+### Verify captcha Codes [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "captcha_id": "XXXXXXXxxxxxxx",
+                "captcha_code": "123123",
+                "phone": "123123123"
+            }
+
++ Response 201 (application/json)
+
+### Verify SMS Codes [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "sms_code": "123xx",
+                "phone": "123123123"
+            }
+
++ Response 200 (application/json)
 
 ## Request Password Reset [/app/reset_password]
 
@@ -381,69 +571,19 @@ If reset password by phone, should call get codes API first.
 
             {
                 "phone": "13232433",
-                "code": "13232',
+                "code": "13232",
                 "new_pwd": "1323200"
             }
 
 + Response 200 (application/json)
 
 
-## Device history data [/app/devdata/{did}{?start_ts,end_ts,entity,attr,limit,skip}]
-
-History data is ordered by ts descending.
+## Device latest data [/app/devdata/{did}/latest]
 
 + Parameters
     + did (required, string, `gdGn7PzAYf4VrhnVag5x8D`)
-    + start_ts (optional, number, `1349032093`)
-    + end_ts (optional, number, `1349032093`)
-    + entity (optional, number, `1`)
-    + attr (optional, string, `temp`)
-    + limit (optional, number, `20`)
-    + skip (optional, number, `0`)
 
-### Retrieve device history data [GET]
-
-+ Request (application/json)
-
-    + Header
-    
-            X-Gizwits-Application-Id: {appid}
-            X-Gizwits-User-token: {token}
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "data": [{
-                    "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
-                    "val": 10
-                },{
-                    "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
-                    "val": 10
-                }]
-            }
-
-
-## Product history data batch [/app/devdata{?product_key,did,start_ts,end_ts,entity,attr,limit,skip}]
-
-History data is ordered by ts descending.
-
-+ Parameters
-    + product_key (required, string, `pk`)
-    + did (optional, string, `gdGn7PzAYf4VrhnVag5x8D`)
-    + start_ts (optional, number, `1349032093`)
-    + end_ts (optional, number, `1349032093`)
-    + entity (optional, number, `1`)
-    + attr (optional, string, `temp`)
-    + limit (optional, number, `20`)
-    + skip (optional, number, `0`)
-
-### Retrieve product history data batch [GET]
+### Get Device latest data [GET]
 
 + Request (application/json)
 
@@ -456,19 +596,12 @@ History data is ordered by ts descending.
     + Body
 
             {
-                "data": [{
-                    "did": "gdGn7PzAYf4VrhnVag5x8D",
-                    "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
-                    "val": 10
-                },{
-                    "did": "gdGn7PzAYf4VrhnVag5x8D",
-                    "ts": 148293984328,
-                    "entity": 1,
-                    "attr": "temp",
-                    "val": 10
-                }]
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
+                "updated_at": 148293984328,
+                "attr": {
+                  "temp": 10,
+                  "humi": 20
+                }
             }
 
 
@@ -486,14 +619,14 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "devices": [{
                     "product_key": "akdlfkad",
@@ -504,7 +637,9 @@ M2M will also call this API to get user bindings.
                     "host": "m2m.gizwits.com",
                     "port": 3128,
                     "remark": "",
-                    "is_disabled": false
+                    "is_disabled": false,
+                    "type": "normal",
+                    "dev_alias": "dev1"
                 },{
                     "product_key": "akdlfkad",
                     "did": "abcada",
@@ -514,7 +649,9 @@ M2M will also call this API to get user bindings.
                     "host": "m2m.gizwits.com",
                     "port": 3128,
                     "remark": "",
-                    "is_disabled": false
+                    "is_disabled": false,
+                    "type": "center_control",
+                    "dev_alias":"dev2"
                 }]
             }
 
@@ -523,25 +660,26 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
     + Body
-    
+
             {
                 "devices": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D",
                     "passcode": "gokit",
-                    "remark": "" # optional
+                    "remark": "",
+                    "dev_alias": "dev1"
                 }]
             }
-    
+
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
 
 ### Unbind Devices [DELETE]
@@ -549,28 +687,81 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
     + Body
-    
+
             {
                 "devices": [{
                     "did": "gdGn7PzAYf4VrhnVag5x8D"
                 }]
             }
-    
+
 + Response 200 (application/json)
 
            {
-                "success": ['abc', 'add'],
-                "failed": ['adad', 'ee']
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
            }
 
 
+## Bind latest [/app/bind_latest]
+
+### Bind by QR content [POST]
+response 201 new bind, response 200 already bound
+
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+               "qr_content": "qr_content"
+            }
+
+
++ Response 201 (application/json)
+
++ Response 200 (application/json)
+
+## Bind Mac [/app/bind_mac]
+
+### Bind by Mac [POST]
+
+X-Gizwits-Timestamp 与服务器相差不能超过 5 分钟
+X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+            X-Gizwits-Timestamp: {req_ts}
+            X-Gizwits-Signature: {sig}
+
+    + Body
+
+            {
+               "product_key": "xxx",
+               "mac": "xxx",
+               "remark": "xxx",
+               "dev_alias": "xxx"
+            }
+
+
++ Response 201 (application/json)
+
+
 ## Device Detail [/app/devices/{did}]
-    
+
 ### Get Device Info [GET]
 
 + Parameters
@@ -579,14 +770,14 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "product_key": "akdlfkad",
                 "did": "abcada",
@@ -609,16 +800,16 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {
                 "did": "abcada",
-                "passcode": "123456",
+                "passcode": "123456"
             }
 
 
@@ -632,20 +823,20 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-User-token: {token}
 
     + Body
-    
+
             {
                 "raw": [<byte>, <byte>, ...]
             }
-            
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {}
 
 ### Set attr val [POST]
@@ -660,8 +851,10 @@ M2M will also call this API to get user bindings.
     + Body
 
             {
-                "attr": "temp",
-                "val": 10
+                "attrs": {
+                    "temp": 10,
+                    "humi": 20
+                }
             }
 
 + Response 200 (application/json)
@@ -669,6 +862,239 @@ M2M will also call this API to get user bindings.
     + Body
 
             {}
+
+## Scheduler [/app/scheduler{?limit,skip}]
+
+### Create Scheduler [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+              "date": "2015-01-01",
+              "time": "12:00",
+              "repeat": "none",
+              "task": [
+                {
+                  "did": "did1",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                },
+                {
+                  "did": "did2",
+                  "product_key": "xxx",
+                  "attrs": {
+                    "attr1": val,
+                    "attr2": val
+                  }
+                }
+              ],
+              "retry_count": 3,
+              "retry_task": "all"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+              "id": "adkle"
+            }
+
+### Get Schedulers [GET]
+
++ Parameters
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 1
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": 1,
+                      "attr2": 2
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              },
+              {
+                "id": "abckaldkl",
+                "created_at": "2015-01-01T12:00:00",
+                "date": "2015-01-01",
+                "time": "12:00",
+                "repeat": "none",
+                "task": [
+                  {
+                    "did": "did1",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  },
+                  {
+                    "did": "did2",
+                    "product_key": "xxx",
+                    "attrs": {
+                      "attr1": "val",
+                      "attr2": "val"
+                    }
+                  }
+                ],
+                "retry_count": 3,
+                "retry_task": "all"
+              }
+            ]
+
+## Remove Scheduler [/app/scheduler/{id}]
+
++ Parameters
+  + id (required, string, `sid1`)
+
+### Remove Scheduler [DELETE]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+## Get scheduler log [/app/scheduler/{id}/logs]
+
++ Parameters
+  + id (required, string, `sid1`)
+
+### Get latest scheduler log [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "datetime": "2015-01-02T12:00:00",
+              "status": "succeed|failed",
+              "detail": {
+                "did1": true,
+                "did2": false
+              }
+            }
+            
+## Aggregated Data [/app/devdata/{did}/agg_data{?start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
++ Parameters
+    + did (required, string, `xxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS",
+                    "did": "xxx"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
+
 
 # Group API for devices
 
@@ -682,17 +1108,19 @@ M2M will also call this API to get user bindings.
 |--------|:------------:|--------:|
 | 400    | 9002         | product_key invalid      |
 
+type 可以为 normal 或者 center_control
+
 + Request (application/x-www-form-urlencoded)
 
     + Body
-        
-            product_key=d69af59e38c711e4a29d52540052876d&passcode=gokit&mac=112233445566
 
-            
+            product_key=d69af59e38c711e4a29d52540052876d&passcode=gokit&mac=112233445566&type=normal
+
+
 + Response 201 (application/text)
 
     + Body
-    
+
             did=gdGn7PzAYf4VrhnVag5x8D
 
 ### Disable Device [DELETE]
@@ -719,11 +1147,19 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/text)
 
     + Body
-    
-            host=m2m.gizwits.com&port=3128&server_ts=1283200300
 
-            
-## OTA - Get Target fid [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
+            host=m2m.gizwits.com&port=3128&server_ts=1283200300&log_host=127.0.0.1&log_port=8888
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Body
+
+            host=m2m.gizwits.com&port=3128&server_ts=1283200300&3rd_cloud=jd&product_uuid=xxx&log_host=127.0.0.1&log_port=8888
+
+
+## OTA v4 - Get Target fid [/dev/ota/target_fid{?did,product_key,type,hard_version,soft_version,current_fid}]
 
 ### Get target fid [GET]
 
@@ -740,11 +1176,15 @@ M2M will also call this API to get user bindings.
 + Response 200 (application/text)
 
     + Body
-    
+
             target_fid=2&download_url=http://xxx&firmware_version=xxx
 
++ Request (application/text)
 
-## OTA - Download Firmware [/dev/ota/download/{id}/{file}]
++ Response 400 (application/text)
+
+
+## OTA v4 - Download Firmware [/dev/ota/download/{id}/{file}]
 
 ### Download Firmware [GET]
 
@@ -759,6 +1199,103 @@ M2M will also call this API to get user bindings.
     + Header
 
             Firmware-Version: version
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
+## OTA v4.1 - Update Firmware Info and Check Latest [/dev/ota/v4.1/update_and_check/{did}]
+
+### Update Firmware Info and Check Latest [POST]
+
++ type
+    + wifi: 1
+    + mcu: 2
+
++ Parameters
+    + did (required, string, `abcada`)
+
++ Request (application/x-www-form-urlencoded)
+
+    + Body
+
+            passcode=xxx&type=1&hard_version=xxxxxxxxx&soft_version=xxxxxxxx
+
++ Response 200 (application/text)
+
+    + Body
+
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware [/dev/ota/v4.1/download/{id}]
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
+            Firmware-MD5: md5
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+
+    + Body
+
+            file
+
+
+## OTA v4.1 - Get latest version temporary [/dev/ota/v4.1/latest{?hard_version,soft_version,product_key,type}]
+
++ type
+    + wifi: 1
+    + mcu: 2
+
++ Parameters
+    + hard_version (required, string, `HBLF0001`)
+    + soft_version (required, string, `40080001`)
+    + product_key (required, string, `pk`)
+    + type (required, integer, `1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+
++ Response 200 (application/text)
+
+    + Body
+
+            soft_ver=SOFT0001&download_url=http://xxx
+
+
+## OTA v4.1 - Download Firmware temporary [/dev/ota/v4.1/download?{id}]
+
+* 请使用download_url的值进行访问，这个api只做解释说明用
+
+### Download Firmware [GET]
+
++ Parameters
+    + id (required, int, `1`)
+
++ Request (application/text)
+
++ Response 200 (application/text)
+
+    + Header
+
+            Soft-Version: SOFT0001
             Firmware-MD5: md5
             Content-Type: application/octet-stream
             Content-Disposition: attachment; filename=xxxx.bin
@@ -811,32 +1348,33 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-Application-Id: {appid}
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "uid": "akkdlfeiow", 
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad"
             }
-            
+
 + Response 401 (application/json)
 
 + Request (application/json)
 
     + Header
-    
+
+            X-Gizwits-Application-Id: {appid}
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "uid": "akkdlfeiow", 
+                "uid": "akkdlfeiow",
                 "token": "akdlfkad"
             }
-            
+
 + Response 200 (application/json)
 
 ## Verify Device [/m2m/verify/device]
@@ -846,31 +1384,31 @@ M2M will also call this API to get user bindings.
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "did": "gdGn7PzAYf4VrhnVag5x8D", 
-                "passcode": "gokit",
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
+                "passcode": "gokit"
             }
-            
+
 + Response 401 (application/json)
 
 + Request (application/json)
 
     + Header
-    
+
             X-Gizwits-M2M-Id: {m2m_id}
 
     + Body
-    
+
             {
-                "did": "gdGn7PzAYf4VrhnVag5x8D", 
-                "passcode": "gokit",
+                "did": "gdGn7PzAYf4VrhnVag5x8D",
+                "passcode": "gokit"
             }
-            
+
 + Response 200 (application/json)
 
     + Body
@@ -929,8 +1467,16 @@ M2M will also call this API to get user bindings.
 
 
 # Group API for BT/BLE Data
+=======
+# Group API for BT/BLE
 
-## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,limit,skip}]
+## Data [/bt/data{?product_key,device_sn,start_ts,end_ts,attrs,limit,skip}]
+
+ts 为整数，精确到毫秒。
+
+批量上传中，任何一笔数据错误，本次上传失败，不存出任何数据。
+
+firmware 字段为可选参数。
 
 ### Save Data [POST]
 
@@ -946,12 +1492,25 @@ M2M will also call this API to get user bindings.
             {
                 "product_key": "xxx",
                 "device_sn": "xxx",
-                "attrs": {
-                    "weight": 50,
-                    "fat": 0.2,
-                    "remark": "too thin"
-                }
-                "ts": xxxxx,
+                "data": [
+                    {
+                        "attrs": {
+                            "weight": 50,
+                            "fat": 0.2,
+                            "remark": "too thin"
+                        },
+                        "firmware": "1.0",
+                        "ts": xxxxx
+                    },
+                    {
+                        "attrs": {
+                            "weight": 50,
+                            "fat": 0.2,
+                            "remark": "too thin"
+                        },
+                        "firmware": "1.0",
+                        "ts": xxxxx
+                    }],
                 "phone_id": "xxxx"
             }
 
@@ -960,10 +1519,11 @@ M2M will also call this API to get user bindings.
 ### Retrieve Data [GET]
 
 + Parameters
-    + product_key (optional, string, ``)
+    + product_key (required, string, `xxx`)
     + device_sn (optional, string, ``)
     + start_ts (optional, number, ``)
     + end_ts (optional, number, ``)
+    + attrs (optional, string, `weight`)
     + limit (optional, number, `20`)
     + skip (optional, number, `0`)
 
@@ -1002,3 +1562,245 @@ M2M will also call this API to get user bindings.
                     "ts": xxx
                 }]
             }
+
+## Get latest version [/bt/latest{?device_sn,firmware,product_key}]
+
++ Parameters
+    + device_sn (required, string, `sn_xxx`)
+    + product_key (required, string, `xxx`)
+    + firmware (required, string, `v1`)
+
+### get latest [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "version": "xx",
+                "size": 102420,
+                "download_url": "http://xxx/xxx"
+            }
+
+## Download firmware [/bt/firmware{?uuid,product_key}]
+
++ Parameters
+    + product_key (required, string, `xxx`)
+    + uuid (required, string, `xxxx`)
+
+### Download [GET]
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/octet-stream)
+
+    + Header
+
+            Content-Type: application/octet-stream
+            Content-Disposition: attachment; filename=xxxx.bin
+            Content-Length: 1000
+            Gizwits-Firmware-MD5: SAD8DS
+            Gizwits-Firmware-Version: V1
+
+    + Body
+
+        binary
+
+
+## Aggregated Data [/bt/agg_data{?product_key,device_sn,start_ts,end_ts,attrs,aggregator,unit}]
+
+### Retrieve Aggregated Data [GET]
+
+start_ts 和 end_ts 为带毫秒的整型时间戳。
+
+attrs 只能为数字类型的数据点。
+
+返回的 datetime 格式:
+
+HOURS:  "2015072010"
+
+DAYS:   "20150720"
+
+WEEKS:  "201529"
+
+MONTHS: "201507"
+
+aggregator include [sum,avg,max,min]
+
+unit include [HOURS,DAYS,WEEKS,MONTHS]
+
++ Parameters
+    + product_key (required, string, `xxx`)
+    + device_sn (optional, string, `xxxx`)
+    + start_ts (required, number, `1111`)
+    + end_ts (optional, number, `1111`)
+    + attrs (required, string, `weight`)
+    + aggregator (required, string, `sum`)
+    + unit (required, string, `DAYS`)
+
++ Request (application/text)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "query": {
+                    "start_ts": xxx,
+                    "end_ts": xxx,
+                    "attrs": "temp,humi",
+                    "aggregator": "sum",
+                    "unit": "DAYS"
+                },
+                "data": [{
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                },
+                {
+                    "uid": "xxx",
+                    "product_key": "xxx",
+                    "device_sn": "xxx",
+                    "attrs": {
+                        "weight": 50,
+                        "fat": 0.2
+                    }
+                    "datetime": xxx
+                }]
+            }
+
+## Bindings [/bt/bindings{?limit,skip}]
+
+### Get Bound Devices [GET]
+
+* Parameters
+    + limit (optional, number, `20`)
+    + skip (optional, number, `0`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "devices": [{
+                    "product_key": "akdlfkad",
+                    "device_sn": "abcada",
+                    "remark": "mywatch"
+                }, {
+                    "product_key": "akdlfkad",
+                    "device_sn": "dabc",
+                    "remark": "ring"
+                }]
+            }
+
+### Bind Devices [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "devices": [{
+                    "product_key": "xxx",
+                    "device_sn": "gdGn7PzAYf4VrhnVag5x8D",
+                    "remark": ""
+                }]
+            }
+
++ Response 200 (application/json)
+
+           {
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
+           }
+
+### Unbind Devices [DELETE]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "devices": [{
+                    "product_key": "xxx",
+                    "device_sn": "gdGn7PzAYf4VrhnVag5x8D"
+                }]
+            }
+
++ Response 200 (application/json)
+
+           {
+                "success": ["abc", "add"],
+                "failed": ["adad", "ee"]
+           }
+
+
+## Custom Event [/bt/events]
+
+### Record Event [POST]
+
+* product_key: required
+* device_sn: optional
+* firmware: optional
+* phone_id: optional
+* event: required
+* count: required, minimum: 1, maximun: 100
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+                "product_key": "xxx",
+                "device_sn": "xxx",
+                "firmware": "1.0",
+                "phone_id": "xxxx",
+                "event": "send_ok",
+                "count": 1
+            }
+
++ Response 201 (application/json)
