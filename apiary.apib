@@ -478,7 +478,44 @@ lang is optional, and should be "en", "zh-cn" (Not implemented yet!)
                 "code": "123456"
             }
 
+
+## Sms Code [/app/sms_code]
+
+*Deprecated*
+
+### Sms Code [POST]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "phone": "13223233"
+            }
+
 + Response 200 (application/json)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-Application-Token: {token}
+
+    + Body
+
+            {
+                "phone": "13223233",
+                "code": "123456"
+            }
+
++ Response 200 (application/json)
+
 
 ## Verify Codes NEW [/app/verify/codes]
 
