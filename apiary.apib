@@ -6,7 +6,7 @@ HOST: http://api.gizwits.com
 ## Error codes
 
 | status | code | message                                         |
-|--------+------+-------------------------------------------------|
+|--------|------|-------------------------------------------------|
 |    400 | 9001 | mac already registered!                         |
 |    400 | 9002 | product_key invalid                             |
 |    400 | 9003 | appid invalid                                   |
@@ -1063,7 +1063,7 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
                 "did2": false
               }
             }
-            
+
 ## Aggregated Data [/app/devdata/{did}/agg_data{?start_ts,end_ts,attrs,aggregator,unit}]
 
 ### Retrieve Aggregated Data [GET]
