@@ -795,6 +795,21 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
 
 
 + Response 201 (application/json)
+    
+    + Body
+    
+            {
+                "product_key": "akdlfkad",
+                "did": "did1",
+                "mac": "mac1",
+                "is_online": true,
+                "host": "m2m.gizwits.com",
+                "port": 1883,
+                "remark": "xxx",
+                "is_disabled": true,
+                "type": "normal",
+                "dev_alias": "xxx"
+            }
 
 
 ## Device Detail [/app/devices/{did}]
