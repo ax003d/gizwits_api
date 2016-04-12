@@ -768,7 +768,7 @@ response 201 new bind, response 200 already bound
 
 + Response 200 (application/json)
 
-## Bind Mac [/app/bind_mac]
+## Bind Mac [/app/bind_mac(?product_key,mac)]
 
 ### Bind by Mac [POST]
 
@@ -803,6 +803,7 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
                 "did": "did1",
                 "mac": "mac1",
                 "is_online": true,
+                "passcode": "xxx",
                 "host": "m2m.gizwits.com",
                 "port": 1883,
                 "remark": "xxx",
@@ -810,6 +811,67 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
                 "type": "normal",
                 "dev_alias": "xxx"
             }
+
+### Unbind By Mac (Preview) [DELETE]
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
+    + Body
+
+            {
+               "product_key": "xxx",
+               "mac": "xxx"
+            }
+
++ Response 200 (application/json)
+
+### Get Binding by Mac (Preview) [GET]
+
++ Parameters
+    + product_key (required, string, `product_key`)
+    + mac (required, string, `112233445566`)
+
++ Request (application/json)
+
+    + Header
+
+            X-Gizwits-Application-Id: {appid}
+            X-Gizwits-User-token: {token}
+
++ Response 200 (application/json)
+
+    + Body
+
+            [{
+               "product_key": "akdlfkad",
+               "did": "abcada",
+               "mac": "1122334455667788",
+               "is_online": false,
+               "passcode": "123456",
+               "host": "m2m.gizwits.com",
+               "port": 3128,
+               "remark": "",
+               "is_disabled": false,
+               "type": "normal",
+               "dev_alias": "dev1"
+            },{
+               "product_key": "akdlfkad",
+               "did": "abcada",
+               "mac": "1122334455667788",
+               "is_online": false,
+               "passcode": "123456",
+               "host": "m2m.gizwits.com",
+               "port": 3128,
+               "remark": "",
+               "is_disabled": false,
+               "type": "center_control",
+               "dev_alias":"dev2"
+            }]
 
 
 ## Device Detail [/app/devices/{did}]
