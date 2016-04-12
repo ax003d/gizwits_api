@@ -768,7 +768,7 @@ response 201 new bind, response 200 already bound
 
 + Response 200 (application/json)
 
-## Bind Mac [/app/bind_mac(?product_key,mac)]
+## Bind Mac [/app/bind_mac]
 
 ### Bind by Mac [POST]
 
@@ -812,7 +812,10 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
                 "dev_alias": "xxx"
             }
 
-### Unbind By Mac (Preview) [DELETE]
+
+### Unbind By Mac [DELETE]
+
+**Preview**
 
 + Request (application/json)
 
@@ -830,7 +833,15 @@ X-Gizwits-Signature = MD5(product_secret + X-Gizwits-Timestamp).lower()
 
 + Response 200 (application/json)
 
-### Get Binding by Mac (Preview) [GET]
+    + Body
+
+            {}
+
+## Get Binding by Mac [/app/bind_mac(?product_key,mac)]
+
+### Get Binding by Mac [GET]
+
+**Preview**
 
 + Parameters
     + product_key (required, string, `product_key`)
